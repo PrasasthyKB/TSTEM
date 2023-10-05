@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Service for the React app
+  react-app:
+    build: .
+    ports:
+      # Map the host's port 3000 to the container's port 80
+      - "3000:80"
+    # Optionally, specify volumes if needed for development
+    # volumes:
+    #   - .:/app
+    networks:
+      # Connect the container to the existing_network (replace "existing_network" with the actual network name)
+      - existing_network
+
+networks:
+  # Declare the external network (replace "existing_network" with the actual network name)
+  existing_network:
+    external:
+      name: existing_network

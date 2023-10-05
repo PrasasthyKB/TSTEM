@@ -1,0 +1,32 @@
+- hosts: twitter-crawler
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: geerlingguy.docker
+    - role: metricbeat
+- hosts: twitter-crawler
+  become: true
+  tasks:
+    - name: Stop Twitter crawler if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/twitter"
+      tags:
+        - twitter
+    - name: Upload crawler code
+      synchronize:
+        src: "{{playbook_dir}}/../service/crawlers/twitter"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - twitter
+    - name: Start Twitter crawler service
+      command: docker-compose up -d --build
+      args:
+        chdir: "/home/ubuntu/twitter"
+      tags:
+        - twitter

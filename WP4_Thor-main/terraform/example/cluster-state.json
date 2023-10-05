@@ -1,0 +1,295 @@
+{
+    "version": 1,
+    "terraform_version": "1.1.3",
+    "serial": 1,
+    "lineage": "<redacted>",
+    "outputs": {},
+    "resources": [
+        {
+            "mode": "data",
+            "type": "aws_availability_zones",
+            "name": "available",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_instance",
+            "name": "clearweb_crawler",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_instance",
+            "name": "darkweb_crawler",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_instance",
+            "name": "elk",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_instance",
+            "name": "kafka",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_instance",
+            "name": "twitter_crawler",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_instance",
+            "name": "wikijs",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_internet_gateway",
+            "name": "main",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_route_table",
+            "name": "main",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_route_table_association",
+            "name": "main",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_security_group",
+            "name": "clearweb_crawler",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_security_group",
+            "name": "darkweb_crawler",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_security_group",
+            "name": "elk",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_security_group",
+            "name": "kafka",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_security_group",
+            "name": "twitter_crawler",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_security_group",
+            "name": "wikijs",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_subnet",
+            "name": "main",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "aws_vpc",
+            "name": "main",
+            "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "clearweb_crawler_env",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "crawler_env",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "darkweb_crawler_env",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "elk_env",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "hosts_ini",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "kafka_env",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "twitter_crawler_env",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        },
+        {
+            "mode": "managed",
+            "type": "local_sensitive_file",
+            "name": "wikijs_env",
+            "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+            "instances": [
+                {
+                    // ...
+                }
+            ]
+        }
+    ]
+}

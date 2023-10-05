@@ -1,0 +1,3 @@
+upstream se {
+    server ${SEARCH_ENGINE_IP}:5000;
+  }

@@ -1,0 +1,171 @@
+# Must run playbook with es_setup tag if you are deploying Elasticsearch for the first time. Otherwise dont include es_setup tag
+# example: ansible-playbook elk.yml -i inventory/hosts.ini --tags untagged,tagged
+
+- hosts: elk
+  vars:
+    - certbot_install_method: snap
+    - certbot_auto_renew: true
+    - certbot_auto_renew_hour: "3"
+    - certbot_auto_renew_minute: "30"
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: geerlingguy.docker
+    - role: metricbeat-es
+    - role: nginxinc.nginx
+    - role: geerlingguy.certbot
+- hosts: elk
+  become: true
+  tasks:
+    - name: Set max virtual memory areas to production value for Elasticsearch
+      command: sysctl -w vm.max_map_count=262144
+      tags:
+        - ["never", "es_setup"]
+    - name: Restart docker service for virtual memory increase to take place
+      command: systemctl restart docker
+      tags:
+        - ["never", "es_setup"]
+    - name: Make max virtual memory areas changes permanent
+      command: sed -i -e '$avm.max_map_count = 262144' /etc/sysctl.conf
+      tags:
+        - ["never", "es_setup"]
+    - name: Upload nginx available files
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/nginx/elk/config/sites-available/"
+        dest: "/etc/nginx/sites-available/"
+        use_ssh_args: true
+      tags:
+        - certbot
+        - nginx
+    - name: Upload nginx conf files
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/nginx/elk/config/nginx.conf"
+        dest: "/etc/nginx/nginx.conf"
+        use_ssh_args: true
+      tags:
+        - certbot
+        - nginx
+    - name: Upload nginx html files
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/nginx/elk/html/"
+        dest: "/usr/share/nginx/html/"
+        use_ssh_args: true
+      tags:
+        - nginx
+    - name: Create sites-enabled directory
+      ansible.builtin.file:
+        path: "/etc/nginx/sites-enabled"
+        state: directory
+      tags:
+        - certbot
+    - name: Enable default nginx config
+      ansible.builtin.file:
+        src: "/etc/nginx/sites-available/default"
+        dest: "/etc/nginx/sites-enabled/default"
+        state: link
+      tags:
+        - certbot
+    - name: Restart nginx service
+      service: name=nginx state=restarted
+      tags:
+        - certbot
+    - name: Upload certbot config
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/nginx/elk/certbot_conf.ini"
+        dest: "/home/ubuntu/"
+        use_ssh_args: true
+      tags:
+        - certbot
+    - name: Set up certbot
+      shell: certbot certonly --nginx --config /home/ubuntu/certbot_conf.ini -d crawlers.csilabs.eu --non-interactive
+      tags:
+        - certbot
+    - name: Initial update for permissions on certbot private keys
+      shell: chmod a+r -R /etc/letsencrypt/archive/crawlers.csilabs.eu/
+      tags:
+        - certbot
+    - name: Set up crontab job to update permissions on certbot private keys
+      ansible.builtin.cron:
+        name: "update crontab"
+        minute: "32"
+        hour: "3"
+        job: "chmod a+r -R /etc/letsencrypt/archive/crawlers.csilabs.eu/"
+      tags:
+        - certbot
+    - name: Disable default nginx config
+      file: name=/etc/nginx/sites-enabled/default state=absent
+      tags:
+        - certbot
+    - name: Create nginx conf files
+      shell: "envsubst < /etc/nginx/sites-available/upstream.template > /etc/nginx/sites-available/crawlers.csilabs.eu"
+      environment:
+        SEARCH_ENGINE_IP: "{{ hostvars[inventory_hostname].search_engine_ip }}"
+      tags:
+        - nginx
+
+    - name: Enable nginx conf files
+      shell: "cat /etc/nginx/sites-available/crawlers.csilabs.eu.template >> /etc/nginx/sites-available/crawlers.csilabs.eu"
+      tags:
+        - nginx
+
+    - name: Enable nginx kibana conf files
+      ansible.builtin.file:
+        src: "/etc/nginx/sites-available/crawlers.csilabs.eu"
+        dest: "/etc/nginx/sites-enabled/crawlers.csilabs.eu"
+        state: link
+      tags:
+        - nginx
+
+    - name: Restart nginx service
+      service: name=nginx state=restarted
+      tags:
+        - nginx
+
+    - name: Stop the ELK stack if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/elk"
+      tags:
+        - elk
+    - name: Remove setup volume if ES needs to be set up again (For adding new users/roles or updating existing ones, etc.)
+      command: docker volume rm elk_setup
+      ignore_errors: yes
+      tags:
+        - ["never","es_setup"]
+    - name: Set permissions for data folder
+      # TODO: File permissions are being set insecurely right now as an easy work-around during development. For actual production level deployment a more secure approach should be used here!
+      ansible.builtin.file:
+        path: /home/ubuntu/data/elk
+        state: directory
+        recurse: yes
+        mode: a+w
+      tags:
+        - ["never","es_setup"]
+    - name: Upload ELK files
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/elk"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - elk
+    - name: Start the ELK stack
+      command: docker-compose up --build -d
+      args:
+        chdir: "/home/ubuntu/elk"
+      tags:
+        - elk
+    - name: Change file ownership and permissions for TLS certificates
+      # TODO: File permissions are being set insecurely right now as an easy work-around during development. For actual production level deployment a more secure approach should be used here!
+      ansible.builtin.file:
+        path: /home/ubuntu/elk/certs
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        recurse: yes
+        mode: a+r
+      tags:
+        - ["never","es_setup"]

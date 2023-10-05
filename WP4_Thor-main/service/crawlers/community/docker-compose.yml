@@ -1,0 +1,14 @@
+version: "3"
+services:
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.2.2
+    environment:
+      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_SERVER}
+      ELASTICSEARCH_USERNAME: filebeat_internal
+      ELASTICSEARCH_PASSWORD: ${ELASTICSEARCH_PASSWORD}
+      MISP_SERVER: ${MISP_SERVER}
+      MISP_API_KEY: ${MISP_API_KEY}
+      OTX_API_KEY: ${OTX_API_KEY}
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./modules.d/threatintel.yml:/usr/share/filebeat/modules.d/threatintel.yml

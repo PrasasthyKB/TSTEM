@@ -1,0 +1,26 @@
+# install docker on all wikijs VMs
+- hosts: wikijs
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: geerlingguy.docker
+    - role: metricbeat
+- hosts: wikijs
+  become: true
+  tasks:
+    - name: Upload WikiJS code
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/wikijs"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+    - name: Adjust permission
+      file:
+        path: "/home/ubuntu/wikijs/.env"
+        owner: root
+        group: root
+        mode: '600'
+
+# note: to restore the data and start the service require manual steps

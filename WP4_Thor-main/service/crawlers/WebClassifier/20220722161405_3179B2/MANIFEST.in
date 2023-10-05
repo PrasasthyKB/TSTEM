@@ -1,0 +1,2 @@
+include PyTorchPageClassPredicition/bentoml.yml
+graft PyTorchPageClassPredicition/artifacts

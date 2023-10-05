@@ -1,0 +1,35 @@
+version: '3'
+services:
+  elasticsearch:
+    build:
+      context: elasticsearch/
+      args:
+        ELASTIC_VERSION: 8.4.3
+    restart: always
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - ./certs/es/:/usr/share/elasticsearch/config/certs:ro
+      - ../data/es_data:/usr/share/elasticsearch/data:z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: -Xms8g -Xmx8g
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+      ES_PUBLISH_HOST: ${ES_PUBLISH_HOST:-}
+      ES_MASTER_IP: ${ES_MASTER_IP:-}
+      ES_DATA_HOST1: ${ES_DATA_HOST1:-}
+      ES_DATA_HOST2: ${ES_DATA_HOST2:-}
+      ES_NODE_NAME: ${ES_NODE_NAME:-}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200 | grep -q 'missing authentication credentials'"]
+      interval: 10s
+      timeout: 10s
+      retries: 120

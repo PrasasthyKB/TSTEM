@@ -1,0 +1,28 @@
+## Default Elasticsearch configuration from Elasticsearch base image.
+## https://github.com/elastic/elasticsearch/blob/master/distribution/docker/src/docker/config/elasticsearch.yml
+#
+network.host: 0.0.0.0
+network.publish_host: ${ES_PUBLISH_HOST}
+node.name: ${ES_MASTER_NODE_NAME}-0
+node.roles: [ master,remote_cluster_client,ingest,ml,transform]
+cluster.name: "thor-cluster"
+discovery.seed_hosts:
+  - ${ES_PUBLISH_HOST}
+  - ${ES_DATA_HOST1}
+  - ${ES_DATA_HOST2}
+bootstrap.memory_lock: true
+## X-Pack settings
+## see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-settings.html
+
+xpack.license.self_generated.type: basic
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.key: certs/${ES_MASTER_NODE_NAME}-0/${ES_MASTER_NODE_NAME}-0.key
+xpack.security.transport.ssl.certificate: certs/${ES_MASTER_NODE_NAME}-0/${ES_MASTER_NODE_NAME}-0.crt
+xpack.security.transport.ssl.certificate_authorities: certs/ca/ca.crt
+xpack.security.transport.ssl.verification_mode: certificate
+
+xpack.monitoring.elasticsearch.collection.enabled: false
+xpack.monitoring.collection.enabled: true
+
+# TODO: Add X-Pack security for http layer as well; need to update kibana and other http clients with certificate for that

@@ -1,0 +1,72 @@
+{"prompt":"The latest updates on Twitter\n\n###\n\n", "completion":" { \"command\": \"search\", \"sources\": [\"Twitter\"], \"elements\": [\"ip\"] } END"}
+{"prompt":"The latest updates on Community feed\n\n###\n\n", "completion":" { \"command\": \"search\", \"sources\": [\"Community\"], \"elements\": [] } END"}
+{"prompt":"The latest updates on Clear Web\n\n###\n\n", "completion":" { \"command\": \"search\", \"sources\": [\"Clear_Web\"] } END"}
+{"prompt":"The latest updates on Dark Web\n\n###\n\n", "completion":" { \"command\": \"search\", \"sources\": [\"Dark_Web\"] } END"}
+{"prompt":"The latest updates on Web\n\n###\n\n", "completion":" { \"command\": \"search\", \"sources\": [\"Dark_Web\", \"Clear_Web\"] } END"}
+{"prompt":"Block the ip 127.0.0.1\n\n###\n\n", "completion":" { \"command\": \"block\", \"ip\": [\"127.0.0.1\"] } END"}
+{"prompt":"Block the ip 123.234.45.56\n\n###\n\n", "completion":" { \"command\": \"block\", \"ip\": [\"127.0.0.1\"] } END"}
+{"prompt":"I want to search for an IP address 123.123.34.45.\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": [\"123.123.34.45\"] } } END"}
+{"prompt":"I want to search for an IP address 123.123.34.45 on 27th of June.\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-06-27\" } END"}
+{"prompt":"Is the IP 123.123.34.45 reported on 12th of July.\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-07-12\" } END"}
+{"prompt":"Is this ip address reported in your database? 123.123.45.56\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": [\"123.123.45.56\"] } END"}
+{"prompt":"show me the reported attacks through port 2300.\n\n###\n\n", "completion":" { \"command\": \"search\", \"port\": [\"2300\"] } END"}
+{"prompt":"show me all the ports 2300 attacks.\n\n###\n\n", "completion":" { \"command\": \"search\", \"port\": [\"2300\"] } END"}
+{"prompt":"show me all the ports 2300 in last week.\n\n###\n\n", "completion":" { \"command\": \"search\", \"port\": [\"2300\"], \"from-date\": \"week\" } END"}
+{"prompt":"Is this IP subnet reported 123.123.*.*.\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": [\"123.123.*.*\"] } END"}
+{"prompt":"Is this email reported to the database john.doe@gmail.com\n\n###\n\n", "completion":" { \"command\": \"search\", \"email\": [\"john.doe@gmail.com\"] } END"}
+{"prompt":"I have received a malicious email from mehrdad@gmail.com. Is it reported to the database?\n\n###\n\n", "completion":" { \"command\": \"search\", \"email\": [\"mehrdad@gmail.com\"] } END"}
+{"prompt":"Is there any email similar to fehhgfgvf@fedgfhgddvd.com in your database\n\n###\n\n", "completion":" { \"command\": \"search\", \"email\": [\"fehhgfgvf@fedgfhgddvd.com\"] } END"}
+{"prompt":"When afegb@tevdde.fef has been reported?\n\n###\n\n", "completion":" { \"command\": \"search\", \"email\": [\"afegb@tevdde.fef\"] } END"}
+{"prompt":"Is the hash abcd435 existed in the elasticsearch database?\n\n###\n\n", "completion":" { \"command\": \"search\", \"hash\": [\"abcd435\"] } END"}
+{"prompt":"Please block that IP address\n\n###\n\n", "completion":" { \"command\": \"block\" } END"}
+{"prompt":"Please block this IP 123.123.34.45 if it existed in the database.\n\n###\n\n", "completion":" { \"command\": \"block\", \"ip\": [\"123.123.34.45\"] } END"}
+{"prompt":"see if you have this IP 123.123.34.45, and then please block that\n\n###\n\n", "completion":" { \"command\": \"block\", \"ip\": [\"123.123.34.45\"] } END"}
+{"prompt":"I want to know the latest email addresses reported in the database\n\n###\n\n", "completion":" { \"command\": \"search\", \"type\": \"email\" } END"}
+{"prompt":"Give me the statistics\n\n###\n\n", "completion":" { \"command\": \"search\" } END"}
+{"prompt":"Give me what you have in database\n\n###\n\n", "completion":" { \"command\": \"search\" } END"}
+{"prompt":"The statistics of the reported IPs\n\n###\n\n", "completion":" { \"command\": \"search\", \"type\": \"ip\" } END"}
+{"prompt":"The latest updates through last 24 hours\n\n###\n\n", "completion":" { \"command\": \"search\", \"type\": \"ip\" } END"}
+{"prompt":"The latest updates through last week\n\n###\n\n", "completion":" { \"command\": \"search\", \"from-date\": \"week\" } END"}
+{"prompt":"The latest updates through 2 weeks ago\n\n###\n\n", "completion":" { \"command\": \"search\", \"from-date\": \"2 week\" } END"}
+{"prompt":"The latest updates through a month ago\n\n###\n\n", "completion":" { \"command\": \"search\", \"from-date\": \"month\" } END"}
+{"prompt":"Give me what is stored in database through last week\n\n###\n\n", "completion":" { \"command\": \"search\", \"from-date\": \"week\" } END"}
+{"prompt":"Is this ip reported 123.123.34.45?\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": \"123.123.34.45\" } END"}
+{"prompt":"Is this Ip address 123.123.34.45 in community feed\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": \"123.123.34.45\", \"source\":[\"Community\"] } END"}
+{"prompt":"What are the recent updates on elasticsearch?\n\n###\n\n", "completion":" { \"command\": \"search\" } END"}
+{"prompt":"What are the latest updates on Cybersecurity?\n\n###\n\n", "completion":" { \"command\": \"search\" } END"}
+{"prompt":"I want to block the IP address 192.168.0.1.\n\n###\n\n", "completion":" { \"command\": \"block\", \"ip\": [\"192.168.0.1\"] } END"}
+{"prompt":"I need information about the IP 10.0.0.1.\n\n###\n\n", "completion":" { \"command\": \"search\", \"ip\": [\"10.0.0.1\"] } END"}
+{"prompt":"Find any reported attacks related to port 8080.\n\n###\n\n", "completion":" { \"command\": \"search\", \"port\": [\"8080\"] } END"}
+{"prompt":"Are there any known vulnerabilities associated with port 443?\n\n###\n\n", "completion":" { \"command\": \"search\", \"port\": [\"443\"] } END"}
+{"prompt":"Are there any known vulnerabilities with port 443 in twitter?\n\n###\n\n", "completion":" { \"command\": \"search\", \"source\": [\"Twitter\"], \"port\": [\"443\"] } END"}
+{"prompt": "I need information about recent cybersecurity threats.\n\n###\n\n", "completion": "{ \"command\": \"search\" } END"}
+{"prompt": "Block the IP address 192.168.1.100.\n\n###\n\n", "completion": "{ \"command\": \"block\", \"ip\": [\"192.168.1.100\"] } END"}
+{"prompt": "Search for any reported attacks on port 8080.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"port\": [\"8080\"] } END"}
+{"prompt": "Find any known vulnerabilities associated with port 443.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"port\": [\"443\"] } END"}
+{"prompt": "Show me the latest updates on network security.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"sources\": [\"Network_Security\"] } END"}
+{"prompt": "I want to block the IP address 10.0.0.5.\n\n###\n\n", "completion": "{ \"command\": \"block\", \"ip\": [\"10.0.0.5\"] } END"}
+{"prompt": "Is the email merryda@sytex.eu reported in your database?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"email\": [\"merryda@sytex.eu\"] } END"}
+{"prompt": "I received a suspicious email from mehrdad@gmail.com. Has it been reported in your database?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"email\": [\"mehrdad@gmail.com\"] } END"}
+{"prompt": "Is there any record of the email fehhgfgvf@fedgfhgddvd.com in your database?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"email\": [\"fehhgfgvf@fedgfhgddvd.com\"] } END"}
+{"prompt": "When was the email afegb@tevdde.fef reported?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"email\": [\"afegb@tevdde.fef\"] } END"}
+{"prompt": "Does the hash abcd435 exist in the Elasticsearch database?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"hash\": [\"abcd435\"] } END"}
+{"prompt": "Retrieve the information stored in the database from the previous week.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"week\" } END"}
+{"prompt": "Show me the data recorded in the database over the past week.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"week\" } END"}
+{"prompt": "What information has been stored in the database during the last week?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"week\" } END"}
+{"prompt": "Retrieve the records from the database that were added in the week.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"week\" } END"}
+{"prompt": "Retrieve the records from the database that were added in the 3 days ago.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"3 day\" } END"}
+{"prompt": "Give me the data from the database that was added three days ago.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"3 day\" } END"}
+{"prompt": "Retrieve the records added to the database five days ago.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"5 day\" } END"}
+{"prompt": "What information was stored in the database 6 days?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"6 day\" } END"}
+{"prompt": "Retrieve the data from the database that was recorded two days ago.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"from-date\": \"3 day\" } END"}
+{"prompt": "I want to search for a port 345 and 535 on June 27, 2023.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"port\": [\"345\", \"535\"], \"from-date\": \"2023-06-27\" } END"}
+{"prompt": "Search for the IP address 123.123.34.45 on 2023-06-27.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-06-27\" } END"}
+{"prompt": "Can you find any information about the IP 123.123.34.45 on the first of June?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-06-01\" } END"}
+{"prompt": "Can you find any information about the IP 123.123.34.45 on the 10th of January?\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-01-10\" } END"}
+{"prompt": "Please provide details about the IP address 123.123.34.45 on May 13.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-05-13\" } END"}
+{"prompt": "Search for ports 345 and 535 on June 27th, 2023.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"port\": [\"345\", \"535\"], \"from-date\": \"2023-06-27\" } END"}
+{"prompt": "Retrieve information about the IP address 123.123.34.45 on June 5, 2023.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-06-05\" } END"}
+{"prompt": "Find any information about the IP 123.123.34.45 on June 1st, 2023.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-06-01\" } END"}
+{"prompt": "Retrieve details about the IP address 123.123.34.45 on Fe 10.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-02-10\" } END"}
+{"prompt": "Please provide information about the IP address 123.123.34.45 on 4th of August.\n\n###\n\n", "completion": "{ \"command\": \"search\", \"ip\": [\"123.123.34.45\"], \"from-date\": \"2023-08-04\" } END"}
+{"prompt": "Block that IP\n\n###\n\n", "completion": "{ \"command\": \"block\" } END"}

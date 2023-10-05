@@ -1,0 +1,81 @@
+- hosts: web-crawler
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: metricbeat
+    - role: geerlingguy.docker
+    - role: andrewrothstein.python
+- hosts: web-crawler
+  become: true
+  tasks:
+    - name: Stop clear web crawler if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/ClearWeb"
+      tags:
+        - clearweb
+    - name: Stop dark web crawler if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/DarkWeb"
+      tags:
+        - darkweb
+    - name: Wipe all docker volumes (get rid of mongodb data)
+      command: docker volume rm {{ item }}
+      with_items:
+        - clearweb_clearweb-mongodb-data
+        - darkweb_darkweb-mongodb-data
+      ignore_errors: yes
+      tags:
+        - ["never", "wipe"]
+    - name: Upload clear web crawler code
+      synchronize:
+        src: "{{playbook_dir}}/../service/crawlers/WebCrawler/ClearWeb"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - clearweb
+    - name: Upload dark web crawler code
+      synchronize:
+        src: "{{playbook_dir}}/../service/crawlers/WebCrawler/DarkWeb"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - darkweb
+    - name: Upload .env file for clear web crawler
+      synchronize:
+        src: "{{playbook_dir}}/../service/crawlers/WebCrawler/.env"
+        dest: "/home/ubuntu/ClearWeb"
+        use_ssh_args: true
+      tags:
+        - clearweb
+    - name: Upload .env file for dark web crawler
+      synchronize:
+        src: "{{playbook_dir}}/../service/crawlers/WebCrawler/.env"
+        dest: "/home/ubuntu/DarkWeb"
+        use_ssh_args: true
+      tags:
+        - darkweb
+    - name: Start Clear Web crawler
+      command: docker-compose up -d --build
+      args:
+        chdir: "/home/ubuntu/ClearWeb"
+      tags:
+        - clearweb
+    - name: Generate dark web docker-compose file
+      command: python3 gen-docker-compose.py
+      args:
+        chdir: "/home/ubuntu/DarkWeb"
+      tags:
+        - darkweb
+    - name: Start Dark Web crawler
+      command: docker-compose up -d --build
+      args:
+        chdir: "/home/ubuntu/DarkWeb"
+      tags:
+        - darkweb

@@ -1,0 +1,32 @@
+# TODO: Use ansible conditionals instead of a separate ansible role for es metric collections
+#
+- name: Create /var/run/docker/netns for mounting the volume
+  ansible.builtin.file:
+    path: /var/run/docker/netns
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+# install metricbeat service on all VMs managed by ansible using docker
+- name: Stop the MetricBeat service if running
+  command: docker-compose down
+  ignore_errors: yes
+  args:
+    chdir: "/home/ubuntu/metricbeat-es"
+  tags:
+    - metricbeat
+- name: Upload MetricBeat files
+  ansible.posix.synchronize:
+    src: "{{playbook_dir}}/../service/metricbeat-es"
+    dest: "/home/ubuntu"
+    use_ssh_args: true
+  tags:
+    - metricbeat
+- name: Start the MetricBeat service
+  command: docker-compose up --build -d
+  args:
+    chdir: "/home/ubuntu/metricbeat-es"
+  environment:
+    METRICBEAT_HOSTNAME: "{{ inventory_hostname }}"
+  tags:
+    - metricbeat

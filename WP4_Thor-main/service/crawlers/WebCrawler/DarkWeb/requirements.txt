@@ -1,0 +1,8 @@
+Scrapy
+scrapy-rotating-proxies
+html2text
+kafka-python
+pymongo
+urllib3
+url-normalize
+w3lib

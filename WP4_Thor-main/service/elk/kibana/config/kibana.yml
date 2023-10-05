@@ -1,0 +1,17 @@
+## Default Kibana configuration from Kibana base image.
+## https://github.com/elastic/kibana/blob/master/src/dev/build/tasks/os_packages/docker_generator/templates/kibana_yml.template.ts
+#
+server.name: kibana
+server.host: 0.0.0.0
+server.port: 5601
+server.basePath: "/kibana"
+server.publicBaseUrl: "https://crawlers.csilabs.eu/kibana"
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+monitoring.ui.container.elasticsearch.enabled: true
+## X-Pack security credentials
+#
+elasticsearch.username: kibana_system
+elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
+server.ssl.enabled: true
+server.ssl.certificate: /etc/letsencrypt/live/crawlers.csilabs.eu/fullchain.pem
+server.ssl.key: /etc/letsencrypt/live/crawlers.csilabs.eu/privkey.pem

@@ -1,0 +1,2 @@
+include Tweet_classification/bentoml.yml
+graft Tweet_classification/artifacts

@@ -1,0 +1,10 @@
+- pipeline.id: twitter-logs
+  path.config: "/usr/share/logstash/pipelines/kafka-twitter.conf"
+- pipeline.id: clearweb-logs
+  path.config: "/usr/share/logstash/pipelines/kafka-clearweb.conf"
+- pipeline.id: darkweb-logs
+  path.config: "/usr/share/logstash/pipelines/kafka-darkweb.conf"
+- pipeline.id: iocs-twitter
+  path.config: "/usr/share/logstash/pipelines/iocs-twitter.conf"
+- pipeline.id: iocs-web
+  path.config: "/usr/share/logstash/pipelines/iocs-web.conf"

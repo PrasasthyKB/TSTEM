@@ -1,0 +1,60 @@
+version: '3.7'
+services:
+  metricbeat:
+    build:
+      context: .
+      args:
+        ELASTIC_VERSION: 8.2.2
+    # Run as 'root' instead of 'metricbeat' (uid 1000) to allow reading
+    # 'docker.sock' and the host's filesystem.
+    user: root
+    network_mode: host
+    hostname: ${METRICBEAT_HOSTNAME}
+    restart: unless-stopped
+    command:
+      # Log to stderr.
+      - -e
+      # Disable config file permissions checks. Allows mounting
+      # 'config/metricbeat.yml' even if it's not owned by root.
+      # see: https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html
+      - --strict.perms=false
+      # Mount point of the host’s filesystem. Required to monitor the host
+      # from within a container.
+      - --system.hostfs=/hostfs
+    volumes:
+      - ./config/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro,Z
+      - type: bind
+        source: /
+        target: /hostfs
+        read_only: true
+      - type: bind
+        source: /sys/fs/cgroup
+        target: /hostfs/sys/fs/cgroup
+        read_only: true
+      - type: bind
+        source: /proc
+        target: /hostfs/proc
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        read_only: true
+      - type: bind
+        source: /run/systemd/private
+        target: /run/systemd/private
+        read_only: true
+      - type: bind
+        source: /var/run/dbus/system_bus_socket
+        target: /var/run/dbus/system_bus_socket
+        read_only: true
+      - type: bind
+        source: /var/run/docker/netns
+        target: /var/run/netns
+        read_only: true
+    environment:
+      ELASTIC_SERVER: ${ELASTICSEARCH_SERVER:-http://elasticsearch:9200}
+      ELASTIC_USER: ${ELASTICSEARCH_USER:-metricbeat_internal}
+      ELASTIC_PASSWORD: ${ELASTICSEARCH_PASSWORD:-changeme}
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+    security_opt:
+      - apparmor:unconfined

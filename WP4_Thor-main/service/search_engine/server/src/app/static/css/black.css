@@ -1,0 +1,52 @@
+body {
+    background-color: #3a3a3a;
+    color: #e4e6e7;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #284a7c;
+}
+
+.nav-link {
+    color: #07aeda;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #2f94da;
+    --bs-btn-border-color: #2f94da;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #2f94da;
+    --bs-btn-hover-border-color: #2f94da;
+    --bs-btn-focus-shadow-rgb: 13,110,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #2f94da;
+    --bs-btn-active-border-color: #2f94da;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #2f94da;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #2f94da;
+    --bs-gradient: none;
+}
+
+.border-primary {
+    border-color: #727272;
+}
+
+.form-control {
+    background-color: #747474 !important;
+    color: #dfdfdf !important;
+    border: #fff !important;
+}
+
+.text-bg-dark {
+    color: #bec8d3!important;
+    background-color: #284a7c !important;
+}
+
+.pretty-pre {
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    background-color: #444343;
+    padding: 10px;
+  }
+

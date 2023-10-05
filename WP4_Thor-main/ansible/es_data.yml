@@ -1,0 +1,82 @@
+# Must run playbook with es_setup tag if you are deploying Elasticsearch for the first time. Otherwise dont include es_setup tag
+# example: ansible-playbook es_data.yml -i inventory/hosts.ini --tags untagged,tagged
+- hosts: es_data
+  name: Run pre-tasks and role ensurement for hosts
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: geerlingguy.docker
+    - role: metricbeat-es
+
+- hosts: es_data
+  name: bring services down (and possibly make necessary changes to max virtual memory areas for docker service)
+  become: true
+  tasks:
+    - name: Stop the es data node if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/es_data"
+      tags:
+        - es_data
+    - name: Set max virtual memory areas to production value for Elasticsearch
+      command: sysctl -w vm.max_map_count=262144
+      tags:
+        - ["never", "es_setup"]
+    - name: Make max virtual memory areas changes permanent
+      command: sed -i -e '$avm.max_map_count = 262144' /etc/sysctl.conf
+      tags:
+        - ["never", "es_setup"]
+    - name: Restart docker service for virtual memory increase to take place
+      command: systemctl restart docker
+      tags:
+        - ["never", "es_setup"]
+
+- hosts: es_data
+  become: true
+  tasks:
+    - name: Upload ssh key to elk data nodes for TLS certificate transfer
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/{{ ansible_ssh_private_key_file }}"
+        dest: "/home/ubuntu/.ssh/elk-master.pem"
+        use_ssh_args: true
+      tags:
+        - ["never", "es_setup"]
+    - name: Pull TLS certificates from master node to data nodes
+      command: "sudo scp -oStrictHostKeyChecking=no -rp -i /home/ubuntu/.ssh/elk-master.pem ubuntu@{{ hostvars[groups['elk'][0]].private_ip }}:/home/ubuntu/elk/certs /home/ubuntu/es_data/"
+      tags:
+        - ["never", "es_setup"]
+    - name: Remove ssh key from elk node
+      ansible.builtin.file:
+        path: /home/ubuntu/.ssh/elk-master.pem
+        state: absent
+      tags:
+        - ["never", "es_setup"]
+    - name: Set permissions for data folder
+      # TODO: File permissions are being set insecurely right now as an easy work-around during development. For actual production level deployment a more secure approach should be used here!
+      ansible.builtin.file:
+        path: /home/ubuntu/data/es_data
+        state: directory
+        recurse: yes
+        mode: a+w
+      tags:
+        - ["never", "es_setup"]
+    - name: Upload es data node service files
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/es_data"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - es_data
+    - name: Start the es data service
+      command: docker-compose up --build -d
+      args:
+        chdir: "/home/ubuntu/es_data"
+      environment:
+        ES_NODE_NAME: "{{ inventory_hostname }}"
+        ES_PUBLISH_HOST: "{{ hostvars[inventory_hostname].private_ip }}"
+      tags:
+        - es_data

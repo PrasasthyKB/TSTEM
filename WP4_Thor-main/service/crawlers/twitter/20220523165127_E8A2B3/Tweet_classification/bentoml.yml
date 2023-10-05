@@ -1,0 +1,47 @@
+version: 0.11.0
+kind: BentoService
+metadata:
+  created_at: 2022-05-23 16:51:30.608308
+  service_name: Tweet_classification
+  service_version: 20220523165127_E8A2B3
+  module_name: Tweet_classifier
+  module_file: Tweet_classifier.py
+env:
+  pip_packages:
+    - bentoml==0.11.0
+    - scipy==1.4.1
+    - pillow==8.1.0
+    - scikit-learn==0.22
+    - numpy==1.19.5
+    - iocextract==1.13.1
+    - regex==2022.3.15
+    - pandas==1.3.5
+    - torch==1.11.0
+  conda_env:
+    name: bentoml-default-conda-env
+    channels:
+      - defaults
+    dependencies: []
+  python_version: 3.8.10
+  docker_base_image: bentoml/model-server:0.11.0-py38
+apis:
+  - name: classify_tweet
+    docs: "BentoService inference API 'classify_tweet', input: 'DataframeInput', output: 'DefaultOutput'"
+    input_type: DataframeInput
+    output_type: DefaultOutput
+    mb_max_batch_size: 2000
+    mb_max_latency: 10000
+    batch: true
+    input_config:
+      orient:
+      typ: frame
+      dtype:
+    output_config:
+      cors: '*'
+artifacts:
+  - name: model
+    artifact_type: PytorchModelArtifact
+    metadata: {}
+  - name: tokenizer
+    artifact_type: PickleArtifact
+    metadata: {}

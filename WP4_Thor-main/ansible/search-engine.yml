@@ -1,0 +1,32 @@
+- hosts: search-engine
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: metricbeat
+    - role: geerlingguy.docker
+- hosts: search-engine
+  become: true
+  tasks:
+    - name: Stop search engine if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/search-engine"
+      tags:
+        - search-engine
+    - name: Upload search engine code
+      synchronize:
+        src: "{{playbook_dir}}/../service/search_engine/server"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - search-engine
+    - name: Start search engine
+      command: docker-compose up -d --build
+      args:
+        chdir: "/home/ubuntu/server"
+      tags:
+        - search-engine

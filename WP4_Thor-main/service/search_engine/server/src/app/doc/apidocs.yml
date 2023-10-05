@@ -1,0 +1,276 @@
+---
+openapi: 3.0.3
+servers:
+- url: "/api"
+components:
+  parameters:
+    sensor:
+      description: Selected sensor's unique name
+      in: path
+      name: sensor
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+info:
+  title: IDUNN THOR–IOC
+  version: 0.0.1
+  description: |
+    This is the API documentation of THOR-IOC module.
+  contact:
+    email: mehrdad.kaheh@oulu.fi
+    name: Developers
+paths:
+  /login:
+    post:
+      description: Login and get json web token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "john.doe"
+                password:
+                  type: string
+                  example: "1234"
+      responses:
+        '200':
+          description: If the credential is valid server returns json web token, then you can put it in Authorization header part and send the requests that need authentication.
+          content:
+            application/json:
+              example:
+                access_token: "eyJ0e..."
+        '401':
+          description: The request body was not valid
+  /users:
+    post:
+      description: Create a new user account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "john.doe"
+                password:
+                  type: string
+                  example: "1234"
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              example:
+                message: "User created successfully"
+  /urls:
+    get:
+      description: Get the list of indicators of compromise in form of IP or URL
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ip
+          in: query
+          description: Filter the results according to the IP address
+          schema:
+            type: string
+            example: 127.0.0.1
+        - name: port
+          in: query
+          description: Filter the results according to the port number
+          schema:
+            type: string
+            example: 12345
+        - name: source
+          in: query
+          description: Filter the results according to the source (community, twitter, clear_web, dark_web)
+          schema:
+            type: string
+            example: twitter
+        - name: url
+          in: query
+          description: Filter the results according to the part or whole of the url
+          schema:
+            type: string
+            example: http://125.43.214.101:37674/Mozi.m
+        - name: page
+          in: query
+          description: Pagination number
+          schema:
+            type: string
+            example: 1
+        - name: size
+          in: query
+          description: Pagination page size
+          schema:
+            type: string
+            example: 100
+        - name: from
+          in: query
+          description: Filter the results according to starting date
+          schema:
+            type: string
+            example: '2023-03-21T09:04:05.000Z'
+        - name: to
+          in: query
+          description: Filter the results according to end date
+          schema:
+            type: string
+            example: '2023-03-21T09:04:05.000Z'
+      responses:
+        '200':
+          description: List of indicators of compromise in form of IP or URL
+          content:
+            application/json:
+              example:
+              - ip: "1.70.9.21"
+                first_seen: "2023-04-05T07:15:14.000Z"
+                path: "http://1.70.9.21:18339/.i"
+                port: 18339
+                scheme: "http"
+              - ip: "125.46.241.253"
+                first_seen: "2023-04-05T07:14:23.000Z"
+                path: "http://125.46.241.253:59796/bin.sh"
+                port: 59796
+                scheme: "http"
+        '400':
+          description: The request body was not valid
+        '415':
+          description: Wrong media type was used
+  /email-domains:
+    get:
+      description: Get the list of indicators of compromise in form of email addresses
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: phrase
+          in: query
+          description: Filter the results according to the part or whole email
+          schema:
+            type: string
+            example: gmail.com
+        - name: source
+          in: query
+          description: Filter the results according to the source (community, twitter, clear_web, dark_web)
+          schema:
+            type: string
+            example: twitter
+        - name: page
+          in: query
+          description: Pagination number
+          schema:
+            type: string
+            example: 1
+        - name: size
+          in: query
+          description: Pagination page size
+          schema:
+            type: string
+            example: 100
+        - name: from
+          in: query
+          description: Filter the results according to starting date
+          schema:
+            type: string
+            example: '2023-03-21T09:04:05.000Z'
+        - name: to
+          in: query
+          description: Filter the results according to end date
+          schema:
+            type: string
+            example: '2023-03-21T09:04:05.000Z'
+      responses:
+        '200':
+          description: List of indicators of compromise in form of IP or URL
+          content:
+            application/json:
+              example:
+              - ip: "1.70.9.21"
+                first_seen: "2023-04-05T07:15:14.000Z"
+                path: "http://1.70.9.21:18339/.i"
+                port: 18339
+                scheme: "http"
+              - ip: "125.46.241.253"
+                first_seen: "2023-04-05T07:14:23.000Z"
+                path: "http://125.46.241.253:59796/bin.sh"
+                port: 59796
+                scheme: "http"
+        '400':
+          description: The request body was not valid
+        '415':
+          description: Wrong media type was used
+  /files:
+    get:
+      description: Get the list of indicators of compromise in form of files
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: extension
+          in: query
+          description: Filter the results according to the extension of the file
+          schema:
+            type: string
+            example: dll
+        - name: hash
+          in: query
+          description: Filter the results according to a whole of part of the hash
+          schema:
+            type: string
+            example: 01f0b950f00
+        - name: source
+          in: query
+          description: Filter the results according to the source (community, twitter, clear_web, dark_web)
+          schema:
+            type: string
+            example: twitter
+        - name: page
+          in: query
+          description: Pagination number
+          schema:
+            type: string
+            example: 1
+        - name: size
+          in: query
+          description: Pagination page size
+          schema:
+            type: string
+            example: 100
+        - name: from
+          in: query
+          description: Filter the results according to starting date
+          schema:
+            type: string
+            example: '2023-03-21T09:04:05.000Z'
+        - name: to
+          in: query
+          description: Filter the results according to end date
+          schema:
+            type: string
+            example: '2023-03-21T09:04:05.000Z'
+      responses:
+        '200':
+          description: List of indicators of compromise in form of files
+          content:
+            application/json:
+              example:
+              - first_seen: "2023-03-29T09:04:05.000Z"
+                size: 628224
+                hash:
+                  sha256: "325f7b8b082c01f0b950f001c0bef4d0fc3bb5cef1a8a74bc9dc60be3bdc32e7"
+                  tlsh: "T196D43B66E60395F4D91705F1054BFBFBA921DB0A84328C6FE388CEA0AFF5C32159D6"
+                  ssdeep: "12288:T0UQoMETWK5TpM7vBzCpgbiH4tDjwRQm3WG5Tms:ZQoMETWK5Te79CpgbiH4xjwRBW5s"
+                  md5: "ae85c25efdd62bed6e2c3ed12a22a217"
+                type: "dll"
+                imphash: "45daeb6ee656a925c2836c6d4abde1b1"
+        '400':
+          description: The request body was not valid
+        '415':
+          description: Wrong media type was used

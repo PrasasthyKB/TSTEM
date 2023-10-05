@@ -1,0 +1,30 @@
+- hosts: web-classifier
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: metricbeat
+    - role: geerlingguy.docker
+  tasks:
+    - name: Stop web classifier if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/WebClassifier"
+      tags:
+        - classifier
+    - name: Upload web classifier code
+      synchronize:
+        src: "{{playbook_dir}}/../service/crawlers/WebClassifier"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - classifier
+    - name: Start web classifier service
+      command: docker-compose up -d --build
+      args:
+        chdir: "/home/ubuntu/WebClassifier"
+      tags:
+        - classifier

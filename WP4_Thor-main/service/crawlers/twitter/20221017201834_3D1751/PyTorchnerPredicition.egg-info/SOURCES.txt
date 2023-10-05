@@ -1,0 +1,15 @@
+MANIFEST.in
+README.md
+setup.py
+PyTorchnerPredicition/Ner_PRED.py
+PyTorchnerPredicition/__init__.py
+PyTorchnerPredicition/bentoml.yml
+PyTorchnerPredicition.egg-info/PKG-INFO
+PyTorchnerPredicition.egg-info/SOURCES.txt
+PyTorchnerPredicition.egg-info/dependency_links.txt
+PyTorchnerPredicition.egg-info/entry_points.txt
+PyTorchnerPredicition.egg-info/requires.txt
+PyTorchnerPredicition.egg-info/top_level.txt
+PyTorchnerPredicition/artifacts/__init__.py
+PyTorchnerPredicition/artifacts/model.pt
+PyTorchnerPredicition/artifacts/tokenizer.pkl

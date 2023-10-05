@@ -1,0 +1,11 @@
+gunicorn[gevent]
+Flask
+Werkzeug
+python-dotenv
+flask-cors
+elasticsearch
+flasgger
+pyyaml
+openai
+flask_jwt_extended
+pymongo

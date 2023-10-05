@@ -1,0 +1,21 @@
+- hosts: misp
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: geerlingguy.docker
+    - role: metricbeat
+- hosts: misp
+  become: true
+  tasks:
+    - name: Upload MISP files
+      synchronize:
+        src: "{{playbook_dir}}/../service/misp"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+    - name: Start MISP
+      command: docker-compose up -d
+      args:
+        chdir: "/home/ubuntu/misp"

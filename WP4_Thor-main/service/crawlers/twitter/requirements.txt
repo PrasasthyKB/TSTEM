@@ -1,0 +1,9 @@
+Flask==2.0.3
+kafka-python==2.0.2
+tweepy==4.6.0
+elastic-transport==8.1.2
+elasticsearch==8.2.0 
+protobuf==3.19.0
+iocextract==1.13.1
+kafka-python==2.0.2
+nltk==3.7

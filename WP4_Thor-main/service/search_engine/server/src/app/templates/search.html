@@ -1,0 +1,224 @@
+{% extends 'master.html' %}
+
+{% block title %}IDUNN THOR-Hunt{% endblock %}
+
+{% block content %}
+
+<div class="row mb-1">
+    <div class="col-lg-8 mx-auto">
+        <img src="{{ url_for('static', filename= 'img/cropped-logo-idunn.png') }}" class="img-fluid mx-auto d-block"
+            alt="Responsive image">
+        <div class="p-4">
+            <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-url-tab" data-bs-toggle="pill" data-bs-target="#pills-url"
+                        type="button" role="tab" aria-controls="pills-url" aria-selected="true">Search URLs and IP
+                        Addresses</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-file-tab" data-bs-toggle="pill" data-bs-target="#pills-file"
+                        type="button" role="tab" aria-controls="pills-file" aria-selected="false">Search files</button>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled"
+                        aria-selected="false" disabled>Others</button>
+                </li> -->
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-url" role="tabpanel" aria-labelledby="pills-url-tab"
+                    tabindex="0">
+                    <div class="row mb-3">
+                        <div class="form-group col-md-4 offset-md-3">
+                            <input type="text" id="input_url" placeholder="URL or IP Address"
+                                class="form-control border-primary">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button id="url_search_btn" class="btn btn-outline-primary btn-block">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-file" role="tabpanel" aria-labelledby="pills-file-tab"
+                    tabindex="0">
+                    <div class="row mb-3">
+                        <div class="form-group col-md-4 offset-md-3">
+                            <input type="text" id="input_file" placeholder="Hash of the file"
+                                class="form-control border-primary">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button id="file_search_btn" class="btn btn-outline-primary btn-block">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab"
+                    tabindex="0">
+                    TO be implemented!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="row mb-5">
+    <form>
+        <div class="row">
+            <div class="form-group col-md-1">
+                <img src="{{ url_for('static', filename= 'img/cropped-logo-idunn.png') }}"
+                    class="img-fluid mx-auto d-block" alt="Responsive image">
+            </div>
+            <div class="form-group col-md-3">
+                <input type="text" id="input_query" placeholder="What're you searching for?"
+                    class="form-control border-primary">
+            </div>
+            <div class="form-group col-md-3">
+                <button id="search_btn" class="btn btn-primary btn-block">Search</button>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+{% if url_results or file_results: %}
+<div class="row">
+    <nav aria-label="...">
+        <ul class="pagination pagination-sm justify-content-center">
+            {% for index in range(0, total // 10) %}
+            {% if page == (index+1) %}
+            <li class="page-item active" aria-current="page"><span class="page-link">{{ index + 1 }}</span></li>
+            {% elif index < 10%}
+            <li class="page-item">
+                <button id="page_btn" value="{{index + 1}}" onclick="changePage(this.value)"
+                    class="page-link">{{index + 1}}</button>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
+{% endif %}
+
+{% if file_results: %}
+<div class="col-md-8 offset-md-1">
+    <h6><span class="bold">{{total}} results found</h6>
+</div>
+<div class="row">
+    <div class="col-md-8 offset-md-1">
+        {% for result in file_results %}
+        {% if result.source: %}
+            <h6><span>Source: </span>{{ result.source }}</h6>
+        {% endif %}
+        {% if result.type: %}
+            <h6><span>File Type: </span>{{ result.type }}</h6>
+        {% endif %}
+        {% if result.size: %}
+            <h6><span>File Size: </span>{{ result.size }} bytes</h6>
+        {% endif %}
+        {% if result.hash: %}
+            {% if result.hash is iterable: %}
+                <h6><span>File hash:</h6>
+                <pre class="pretty-pre">{{ result.hash|safe }}</pre>
+            {% endif %}
+        {% endif %}
+        {% if result.first_seen: %}
+            <span class="badge text-bg-dark">Seen on: {{ result.first_seen }}</span>
+        {% endif %}
+        <hr>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+{% if url_results: %}
+<div class="row">
+    <div class="col-md-8 offset-md-1">
+        <h6><span class="bold">{{total}} results found</h6>
+    </div>
+    <div class="col-md-8 offset-md-1">
+        {% for result in url_results %}
+        {% if result.ip: %}
+            <h6><span>IP: </span>{{ result.ip }}</h6>
+        {% endif %}
+        {% if result.path: %}
+            <h6><span>Full path: </span>{{ result.path }}</h6>
+        {% endif %}
+        {% if result.first_seen: %}
+            <span class="badge text-bg-dark">Seen on: {{ result.first_seen }}</span>
+        {% endif %}
+        {% if result.source: %}
+            <span class="badge text-bg-dark">Source: {{ result.source }}</span>
+        {% endif %}
+
+        <hr>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% if total == 0: %}
+<div class="row">
+    <div class="col-md-8 offset-md-1">
+        <h6>No IoC with your specification found</h6>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        activaTab('aaa');
+    });
+
+    function activaTab(tab) {
+        $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+    };
+
+    $('#input_url').val(getUrlVars()["url"]);
+    $('#input_file').val(getUrlVars()["file"]);
+
+    $("#url_search_btn").click(function (e) {
+        e.preventDefault();
+        url = $("#input_url").val();
+        page = 1;
+        oldUrl = window.location.href.split('?')[0];
+        if (history.pushState) {
+            var newUrl = oldUrl + "?url=" + url + "&page=" + page;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+            location.reload(true);
+        }
+        return false;
+    });
+
+    $("#file_search_btn").click(function (e) {
+        e.preventDefault();
+        file = $("#input_file").val();
+        page = 1;
+        oldUrl = window.location.href.split('?')[0];
+        if (history.pushState) {
+            var newUrl = oldUrl + "?file=" + file + "&page=" + page;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+            location.reload(true);
+        }
+        return false;
+    });
+
+    function changePage(val) {
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl);
+        url.searchParams.set("page", val);
+        var newUrl = url.href;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+        location.reload(true);
+    }
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+</script>
+{% endblock %}

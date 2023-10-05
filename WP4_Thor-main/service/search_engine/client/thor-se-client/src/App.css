@@ -1,0 +1,259 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+.App {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  background-color: #282c34;
+  color: white;
+  position: absolute;
+  top: 0; bottom: 0; right: 0; left: 0;
+  overflow: hidden;
+}
+
+.sidemenu {
+  width: 260px;
+  padding: 10px;
+  background-color: #202123;
+}
+
+.sidemenu-button{
+  padding:12px;
+  border:1px solid #4d4d4f;
+  border-radius:5px;
+  text-align: left;
+  transition: ease 0.25s all;
+  cursor: pointer;
+}
+
+.sidemenu-button:hover{
+  background-color: #27282b;
+}
+
+.sidemenu-button span{
+  padding-left: 6px;
+  padding-right:12px;
+}
+
+.configuration-button {
+  align-self: flex-end; /* Position the Configuration button at the bottom */
+}
+
+.sidemenu-history {
+  /* Styles for the sidemenu-history container */
+  padding-top:12px;
+  border-radius:5px;
+  text-align: left;
+  color: #9d9d9f;
+}
+
+.sidemenu-history > .title {
+  /* Styles for the title element */
+  font-style: italic;
+  padding: 12px;
+  font-size: 20px;
+}
+
+.sidemenu-history .history-item {
+  /* Styles for the history-item element */
+  padding: 10px 10px;
+  font-size: 15px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.sidemenu-history .history-item:hover {
+  color: rgb(232, 232, 232); /* Changing the color when hovering */
+}
+
+.sidemenu-history .history-item .date {
+  /* Styles for the date element */
+}
+
+.sidemenu-history .history-item .text {
+  /* Styles for the text element */
+}
+
+.chatbox {
+  flex:1;
+  background-color: #343541;
+  position: relative;
+}
+
+.modal-title {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.chat-input-holder{
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background-image: linear-gradient(180deg,rgba(53,55,64,0),#353740 70.85%);
+  height: 10%;
+}
+
+.chat-input-textarea{
+  background-color: #40414f;
+  width: 90%;
+  border:none;
+  border-radius: 5px;
+  padding: 12px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 1.1em;
+}
+
+.chat-log{
+  text-align: left;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.chat-message.chatgpt{
+  background-color: #444654;
+}
+
+.chat-message-center{
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  padding: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.chat-bottom{
+  height: 200px;
+}
+
+.avatar{
+  background: white;
+  border-radius: 20%;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar.chatgpt{
+  /* background: #0da37f; */
+  background-image: url("thor.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.message{
+  flex: 0 80%;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4em;
+}
+
+
+/* /////////////////// */
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Styles for input fields */
+.modal-input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #4d4d4f;
+  border-radius: 5px;
+  background-color: #202123;
+  color: white;
+}
+
+/* Styles for buttons */
+.modal-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.modal-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.test-button {
+  background-color: #40a9ff;
+  color: white;
+  margin: 5px;
+}
+
+.test-button:hover {
+  background-color: #2f7dbd;
+}
+
+
+.save-button {
+  background-color: #40ff60;
+  color: white;
+  margin: 5px;
+}
+
+.save-button:hover {
+  background-color: #40bd2f;
+}
+
+.cancel-button {
+  background-color: #f5222d;
+  color: white;
+  margin: 5px;
+}
+
+.cancel-button:hover {
+  background-color: #ff4d4f;
+}
+
+.modal-message{
+  color: white;
+  font-size: 14px;
+}

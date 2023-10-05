@@ -1,0 +1,1446 @@
+Case Study: logstash-ioc index, 18/12/2022T0:52, http://194.4.49.101/
+
+Guides: Creating N-Grams https://stackoverflow.com/questions/6467067/how-to-search-for-a-part-of-a-word-with-elasticsearch
+
+
+JSON extracted from logstash-ioc:
+{
+    "_index": "logstash-iocs-stream",
+    "_id": "POi4IoUBPeDjnDFsTDWf",
+    "_version": 1,
+    "_score": 0,
+    "_source": {
+      "ioc_source": "Twitter",
+      "@timestamp": "2022-12-18T00:52:07.000Z",
+      "value": "http://194.4.49.101/",
+      "type": "url",
+      "@version": "1",
+      "last_id": "C-i3IoUBPeDjnDFseDUQ"
+    },
+    "fields": {
+      "@timestamp": [
+        "2022-12-18T00:52:07.000Z"
+      ],
+      "ioc_source.keyword": [
+        "Twitter"
+      ],
+      "type.keyword": [
+        "url"
+      ],
+      "value.keyword": [
+        "http://194.4.49.101/"
+      ],
+      "@version": [
+        "1"
+      ],
+      "@version.keyword": [
+        "1"
+      ],
+      "type": [
+        "url"
+      ],
+      "ioc_source": [
+        "Twitter"
+      ],
+      "value": [
+        "http://194.4.49.101/"
+      ]
+    }
+  }
+
+
+////////////////
+
+Json extracted from logstash-twitter-crawler
+Search key in Kibana: _source.retweeted_status.quoted_status.text = *194[.]4[.]*
+
+{
+    "_index": "logstash-twitter-crawler-logs",
+    "_id": "C-i3IoUBPeDjnDFseDUQ",
+    "_version": 1,
+    "_score": 0,
+    "_ignored": [
+      "event.original.keyword"
+    ],
+    "_source": {
+      "retweeted_status": {
+        "entities": {
+          "user_mentions": [],
+          "symbols": [],
+          "hashtags": [
+            {
+              "text": "ioc",
+              "indices": [
+                39,
+                43
+              ]
+            },
+            {
+              "text": "malware",
+              "indices": [
+                44,
+                52
+              ]
+            }
+          ],
+          "urls": []
+        },
+        "contributors": null,
+        "in_reply_to_user_id": null,
+        "place": null,
+        "filter_level": "low",
+        "in_reply_to_status_id_str": null,
+        "user": {
+          "listed_count": 0,
+          "description": "I am a bot looking for C&Cs",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706",
+          "profile_sidebar_fill_color": "DDEEF6",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg",
+          "url": null,
+          "profile_text_color": "333333",
+          "name": "Tracker C2 Bot",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg",
+          "geo_enabled": false,
+          "profile_sidebar_border_color": "C0DEED",
+          "profile_background_color": "F5F8FA",
+          "profile_background_tile": false,
+          "default_profile": true,
+          "created_at": "Wed Dec 07 06:47:13 +0000 2022",
+          "lang": null,
+          "withheld_in_countries": [],
+          "followers_count": 12,
+          "profile_background_image_url_https": "",
+          "time_zone": null,
+          "favourites_count": 12,
+          "statuses_count": 122,
+          "protected": false,
+          "contributors_enabled": false,
+          "utc_offset": null,
+          "profile_background_image_url": "",
+          "default_profile_image": false,
+          "profile_use_background_image": true,
+          "verified": false,
+          "following": null,
+          "friends_count": 0,
+          "is_translator": false,
+          "notifications": null,
+          "id_str": "1600381301235896322",
+          "profile_link_color": "1DA1F2",
+          "location": null,
+          "id": 1600381301235896300,
+          "screen_name": "TrackerC2Bot",
+          "translator_type": "none",
+          "follow_request_sent": null
+        },
+        "coordinates": null,
+        "reply_count": 0,
+        "source": "<a href=\"https://nasdm.tk\" rel=\"nofollow\">C2Tracker</a>",
+        "in_reply_to_screen_name": null,
+        "created_at": "Sun Dec 18 00:51:52 +0000 2022",
+        "truncated": false,
+        "in_reply_to_user_id_str": null,
+        "lang": "en",
+        "retweeted": false,
+        "quote_count": 0,
+        "in_reply_to_status_id": null,
+        "favorited": false,
+        "is_quote_status": false,
+        "favorite_count": 0,
+        "retweet_count": 1,
+        "id_str": "1604278238309670914",
+        "text": "Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware",
+        "geo": null,
+        "id": 1604278238309671000
+      },
+      "entities": {
+        "user_mentions": [
+          {
+            "indices": [
+              3,
+              16
+            ],
+            "screen_name": "TrackerC2Bot",
+            "id": 1600381301235896300,
+            "name": "Tracker C2 Bot",
+            "id_str": "1600381301235896322"
+          }
+        ],
+        "symbols": [],
+        "hashtags": [
+          {
+            "text": "ioc",
+            "indices": [
+              57,
+              61
+            ]
+          },
+          {
+            "text": "malware",
+            "indices": [
+              62,
+              70
+            ]
+          }
+        ],
+        "urls": []
+      },
+      "timestamp_ms": "1671324722071",
+      "@timestamp": "2022-12-18T00:52:07.211695191Z",
+      "contributors": null,
+      "in_reply_to_user_id": null,
+      "place": null,
+      "filter_level": "low",
+      "in_reply_to_status_id_str": null,
+      "user": {
+        "listed_count": 6685,
+        "description": "News Hub! Get the latest Security News & Updates!",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/710123736175783938/1458287472",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg",
+        "url": null,
+        "profile_text_color": "333333",
+        "name": "Security News",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg",
+        "geo_enabled": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_background_color": "F5F8FA",
+        "profile_background_tile": false,
+        "default_profile": true,
+        "created_at": "Wed Mar 16 15:21:07 +0000 2016",
+        "lang": null,
+        "withheld_in_countries": [],
+        "followers_count": 43872,
+        "profile_background_image_url_https": "",
+        "time_zone": null,
+        "favourites_count": 38,
+        "statuses_count": 3022418,
+        "protected": false,
+        "contributors_enabled": false,
+        "utc_offset": null,
+        "profile_background_image_url": "",
+        "default_profile_image": false,
+        "profile_use_background_image": true,
+        "verified": false,
+        "following": null,
+        "friends_count": 1,
+        "is_translator": false,
+        "notifications": null,
+        "id_str": "710123736175783938",
+        "profile_link_color": "1DA1F2",
+        "location": "Hyderabad, India",
+        "id": 710123736175784000,
+        "screen_name": "sectest9",
+        "translator_type": "none",
+        "follow_request_sent": null
+      },
+      "@version": "1",
+      "coordinates": null,
+      "reply_count": 0,
+      "source": "<a href=\"https://ho.com\" rel=\"nofollow\">auto is the only way it can be </a>",
+      "in_reply_to_screen_name": null,
+      "created_at": "Sun Dec 18 00:52:02 +0000 2022",
+      "truncated": false,
+      "in_reply_to_user_id_str": null,
+      "lang": "en",
+      "retweeted": false,
+      "quote_count": 0,
+      "in_reply_to_status_id": null,
+      "favorited": false,
+      "is_quote_status": false,
+      "favorite_count": 0,
+      "retweet_count": 0,
+      "id_str": "1604278277538881537",
+      "text": "RT @TrackerC2Bot: Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware",
+      "geo": null,
+      "id": 1604278277538881500,
+      "event": {
+        "original": "{\"created_at\": \"Sun Dec 18 00:52:02 +0000 2022\", \"id\": 1604278277538881537, \"id_str\": \"1604278277538881537\", \"text\": \"RT @TrackerC2Bot: Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://ho.com\\\" rel=\\\"nofollow\\\">auto is the only way it can be </a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 710123736175783938, \"id_str\": \"710123736175783938\", \"name\": \"Security News\", \"screen_name\": \"sectest9\", \"location\": \"Hyderabad, India\", \"url\": null, \"description\": \"News Hub! Get the latest Security News & Updates!\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 43872, \"friends_count\": 1, \"listed_count\": 6685, \"favourites_count\": 38, \"statuses_count\": 3022418, \"created_at\": \"Wed Mar 16 15:21:07 +0000 2016\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/710123736175783938/1458287472\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"retweeted_status\": {\"created_at\": \"Sun Dec 18 00:51:52 +0000 2022\", \"id\": 1604278238309670914, \"id_str\": \"1604278238309670914\", \"text\": \"Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://nasdm.tk\\\" rel=\\\"nofollow\\\">C2Tracker</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"name\": \"Tracker C2 Bot\", \"screen_name\": \"TrackerC2Bot\", \"location\": null, \"url\": null, \"description\": \"I am a bot looking for C&Cs\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 12, \"friends_count\": 0, \"listed_count\": 0, \"favourites_count\": 12, \"statuses_count\": 122, \"created_at\": \"Wed Dec 07 06:47:13 +0000 2022\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 1, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [39, 43]}, {\"text\": \"malware\", \"indices\": [44, 52]}], \"urls\": [], \"user_mentions\": [], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\"}, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 0, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [57, 61]}, {\"text\": \"malware\", \"indices\": [62, 70]}], \"urls\": [], \"user_mentions\": [{\"screen_name\": \"TrackerC2Bot\", \"name\": \"Tracker C2 Bot\", \"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"indices\": [3, 16]}], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\", \"timestamp_ms\": \"1671324722071\"}"
+      }
+    },
+    "fields": {
+      "user.listed_count": [
+        6685
+      ],
+      "filter_level.keyword": [
+        "low"
+      ],
+      "retweeted_status.user.profile_sidebar_fill_color": [
+        "DDEEF6"
+      ],
+      "user.profile_background_tile": [
+        false
+      ],
+      "retweeted_status.user.geo_enabled": [
+        false
+      ],
+      "retweeted_status.user.profile_background_image_url": [
+        ""
+      ],
+      "retweeted_status.user.created_at": [
+        "Wed Dec 07 06:47:13 +0000 2022"
+      ],
+      "retweeted_status.user.screen_name": [
+        "TrackerC2Bot"
+      ],
+      "created_at.keyword": [
+        "Sun Dec 18 00:52:02 +0000 2022"
+      ],
+      "retweeted_status.user.profile_text_color": [
+        "333333"
+      ],
+      "retweeted_status.user.friends_count": [
+        0
+      ],
+      "user.screen_name.keyword": [
+        "sectest9"
+      ],
+      "is_quote_status": [
+        false
+      ],
+      "entities.user_mentions.name": [
+        "Tracker C2 Bot"
+      ],
+      "retweeted_status.user.id": [
+        1600381301235896300
+      ],
+      "retweeted_status.user.profile_background_image_url.keyword": [
+        ""
+      ],
+      "user.profile_text_color.keyword": [
+        "333333"
+      ],
+      "text": [
+        "RT @TrackerC2Bot: Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "id": [
+        1604278277538881500
+      ],
+      "retweeted_status.user.profile_background_image_url_https": [
+        ""
+      ],
+      "retweeted_status.truncated": [
+        false
+      ],
+      "retweeted_status.user.name.keyword": [
+        "Tracker C2 Bot"
+      ],
+      "retweeted_status.user.profile_image_url": [
+        "http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "retweeted_status.id_str.keyword": [
+        "1604278238309670914"
+      ],
+      "user.id": [
+        710123736175784000
+      ],
+      "user.profile_text_color": [
+        "333333"
+      ],
+      "reply_count": [
+        0
+      ],
+      "retweeted_status.user.profile_background_image_url_https.keyword": [
+        ""
+      ],
+      "user.profile_sidebar_border_color.keyword": [
+        "C0DEED"
+      ],
+      "user.profile_background_image_url_https": [
+        ""
+      ],
+      "retweeted_status.retweeted": [
+        false
+      ],
+      "retweeted_status.user.created_at.keyword": [
+        "Wed Dec 07 06:47:13 +0000 2022"
+      ],
+      "retweeted_status.user.profile_link_color": [
+        "1DA1F2"
+      ],
+      "retweeted_status.user.profile_sidebar_border_color": [
+        "C0DEED"
+      ],
+      "user.profile_background_color.keyword": [
+        "F5F8FA"
+      ],
+      "text.keyword": [
+        "RT @TrackerC2Bot: Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "user.profile_image_url.keyword": [
+        "http://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg"
+      ],
+      "retweeted_status.user.id_str": [
+        "1600381301235896322"
+      ],
+      "user.followers_count": [
+        43872
+      ],
+      "retweeted_status.filter_level.keyword": [
+        "low"
+      ],
+      "user.location": [
+        "Hyderabad, India"
+      ],
+      "retweeted_status.filter_level": [
+        "low"
+      ],
+      "user.name": [
+        "Security News"
+      ],
+      "created_at": [
+        "Sun Dec 18 00:52:02 +0000 2022"
+      ],
+      "retweeted_status.user.profile_background_tile": [
+        false
+      ],
+      "retweeted_status.retweet_count": [
+        1
+      ],
+      "retweeted_status.user.profile_background_color.keyword": [
+        "F5F8FA"
+      ],
+      "entities.user_mentions.name.keyword": [
+        "Tracker C2 Bot"
+      ],
+      "retweeted_status.entities.hashtags.indices": [
+        39,
+        43,
+        44,
+        52
+      ],
+      "retweeted_status.source": [
+        "<a href=\"https://nasdm.tk\" rel=\"nofollow\">C2Tracker</a>"
+      ],
+      "retweeted": [
+        false
+      ],
+      "user.created_at.keyword": [
+        "Wed Mar 16 15:21:07 +0000 2016"
+      ],
+      "entities.user_mentions.id_str.keyword": [
+        "1600381301235896322"
+      ],
+      "retweeted_status.user.profile_image_url.keyword": [
+        "http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "retweeted_status.favorited": [
+        false
+      ],
+      "user.protected": [
+        false
+      ],
+      "entities.hashtags.text": [
+        "ioc",
+        "malware"
+      ],
+      "retweeted_status.user.profile_text_color.keyword": [
+        "333333"
+      ],
+      "quote_count": [
+        0
+      ],
+      "entities.user_mentions.indices": [
+        3,
+        16
+      ],
+      "retweeted_status.text": [
+        "Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "user.profile_background_color": [
+        "F5F8FA"
+      ],
+      "retweeted_status.source.keyword": [
+        "<a href=\"https://nasdm.tk\" rel=\"nofollow\">C2Tracker</a>"
+      ],
+      "retweeted_status.entities.hashtags.text": [
+        "ioc",
+        "malware"
+      ],
+      "truncated": [
+        false
+      ],
+      "user.description.keyword": [
+        "News Hub! Get the latest Security News & Updates!"
+      ],
+      "user.profile_image_url_https.keyword": [
+        "https://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg"
+      ],
+      "retweeted_status.quote_count": [
+        0
+      ],
+      "user.description": [
+        "News Hub! Get the latest Security News & Updates!"
+      ],
+      "entities.hashtags.indices": [
+        57,
+        61,
+        62,
+        70
+      ],
+      "retweeted_status.user.translator_type.keyword": [
+        "none"
+      ],
+      "retweeted_status.user.followers_count": [
+        12
+      ],
+      "retweeted_status.user.contributors_enabled": [
+        false
+      ],
+      "id_str.keyword": [
+        "1604278277538881537"
+      ],
+      "lang.keyword": [
+        "en"
+      ],
+      "@timestamp": [
+        "2022-12-18T00:52:07.211Z"
+      ],
+      "user.profile_image_url": [
+        "http://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg"
+      ],
+      "retweeted_status.user.translator_type": [
+        "none"
+      ],
+      "retweeted_status.user.is_translator": [
+        false
+      ],
+      "retweeted_status.user.verified": [
+        false
+      ],
+      "user.verified": [
+        false
+      ],
+      "retweeted_status.favorite_count": [
+        0
+      ],
+      "retweeted_status.user.profile_banner_url": [
+        "https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706"
+      ],
+      "retweeted_status.text.keyword": [
+        "Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "entities.hashtags.text.keyword": [
+        "ioc",
+        "malware"
+      ],
+      "retweeted_status.user.profile_sidebar_border_color.keyword": [
+        "C0DEED"
+      ],
+      "retweeted_status.user.favourites_count": [
+        12
+      ],
+      "source": [
+        "<a href=\"https://ho.com\" rel=\"nofollow\">auto is the only way it can be </a>"
+      ],
+      "user.profile_sidebar_border_color": [
+        "C0DEED"
+      ],
+      "entities.user_mentions.screen_name": [
+        "TrackerC2Bot"
+      ],
+      "user.translator_type": [
+        "none"
+      ],
+      "retweet_count": [
+        0
+      ],
+      "user.profile_use_background_image": [
+        true
+      ],
+      "user.id_str": [
+        "710123736175783938"
+      ],
+      "entities.user_mentions.id": [
+        1600381301235896300
+      ],
+      "retweeted_status.user.default_profile": [
+        true
+      ],
+      "user.profile_banner_url": [
+        "https://pbs.twimg.com/profile_banners/710123736175783938/1458287472"
+      ],
+      "user.created_at": [
+        "Wed Mar 16 15:21:07 +0000 2016"
+      ],
+      "user.profile_banner_url.keyword": [
+        "https://pbs.twimg.com/profile_banners/710123736175783938/1458287472"
+      ],
+      "user.profile_image_url_https": [
+        "https://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg"
+      ],
+      "user.profile_background_image_url": [
+        ""
+      ],
+      "user.translator_type.keyword": [
+        "none"
+      ],
+      "event.original": [
+        "{\"created_at\": \"Sun Dec 18 00:52:02 +0000 2022\", \"id\": 1604278277538881537, \"id_str\": \"1604278277538881537\", \"text\": \"RT @TrackerC2Bot: Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://ho.com\\\" rel=\\\"nofollow\\\">auto is the only way it can be </a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 710123736175783938, \"id_str\": \"710123736175783938\", \"name\": \"Security News\", \"screen_name\": \"sectest9\", \"location\": \"Hyderabad, India\", \"url\": null, \"description\": \"News Hub! Get the latest Security News & Updates!\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 43872, \"friends_count\": 1, \"listed_count\": 6685, \"favourites_count\": 38, \"statuses_count\": 3022418, \"created_at\": \"Wed Mar 16 15:21:07 +0000 2016\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/710123736175783938/1458287472\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"retweeted_status\": {\"created_at\": \"Sun Dec 18 00:51:52 +0000 2022\", \"id\": 1604278238309670914, \"id_str\": \"1604278238309670914\", \"text\": \"Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://nasdm.tk\\\" rel=\\\"nofollow\\\">C2Tracker</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"name\": \"Tracker C2 Bot\", \"screen_name\": \"TrackerC2Bot\", \"location\": null, \"url\": null, \"description\": \"I am a bot looking for C&Cs\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 12, \"friends_count\": 0, \"listed_count\": 0, \"favourites_count\": 12, \"statuses_count\": 122, \"created_at\": \"Wed Dec 07 06:47:13 +0000 2022\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 1, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [39, 43]}, {\"text\": \"malware\", \"indices\": [44, 52]}], \"urls\": [], \"user_mentions\": [], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\"}, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 0, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [57, 61]}, {\"text\": \"malware\", \"indices\": [62, 70]}], \"urls\": [], \"user_mentions\": [{\"screen_name\": \"TrackerC2Bot\", \"name\": \"Tracker C2 Bot\", \"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"indices\": [3, 16]}], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\", \"timestamp_ms\": \"1671324722071\"}"
+      ],
+      "retweeted_status.id_str": [
+        "1604278238309670914"
+      ],
+      "user.default_profile_image": [
+        false
+      ],
+      "retweeted_status.user.screen_name.keyword": [
+        "TrackerC2Bot"
+      ],
+      "retweeted_status.user.profile_link_color.keyword": [
+        "1DA1F2"
+      ],
+      "user.statuses_count": [
+        3022418
+      ],
+      "timestamp_ms": [
+        "1671324722071"
+      ],
+      "@version.keyword": [
+        "1"
+      ],
+      "retweeted_status.user.id_str.keyword": [
+        "1600381301235896322"
+      ],
+      "user.location.keyword": [
+        "Hyderabad, India"
+      ],
+      "retweeted_status.user.statuses_count": [
+        122
+      ],
+      "user.is_translator": [
+        false
+      ],
+      "retweeted_status.user.default_profile_image": [
+        false
+      ],
+      "user.screen_name": [
+        "sectest9"
+      ],
+      "retweeted_status.user.listed_count": [
+        0
+      ],
+      "user.profile_background_image_url_https.keyword": [
+        ""
+      ],
+      "user.friends_count": [
+        1
+      ],
+      "retweeted_status.is_quote_status": [
+        false
+      ],
+      "entities.user_mentions.id_str": [
+        "1600381301235896322"
+      ],
+      "retweeted_status.user.description.keyword": [
+        "I am a bot looking for C&Cs"
+      ],
+      "user.id_str.keyword": [
+        "710123736175783938"
+      ],
+      "entities.user_mentions.screen_name.keyword": [
+        "TrackerC2Bot"
+      ],
+      "user.contributors_enabled": [
+        false
+      ],
+      "timestamp_ms.keyword": [
+        "1671324722071"
+      ],
+      "retweeted_status.user.profile_sidebar_fill_color.keyword": [
+        "DDEEF6"
+      ],
+      "retweeted_status.lang.keyword": [
+        "en"
+      ],
+      "user.default_profile": [
+        true
+      ],
+      "retweeted_status.user.profile_use_background_image": [
+        true
+      ],
+      "filter_level": [
+        "low"
+      ],
+      "id_str": [
+        "1604278277538881537"
+      ],
+      "retweeted_status.lang": [
+        "en"
+      ],
+      "retweeted_status.entities.hashtags.text.keyword": [
+        "ioc",
+        "malware"
+      ],
+      "@version": [
+        "1"
+      ],
+      "user.profile_sidebar_fill_color": [
+        "DDEEF6"
+      ],
+      "favorite_count": [
+        0
+      ],
+      "user.profile_link_color.keyword": [
+        "1DA1F2"
+      ],
+      "retweeted_status.user.profile_background_color": [
+        "F5F8FA"
+      ],
+      "retweeted_status.user.description": [
+        "I am a bot looking for C&Cs"
+      ],
+      "lang": [
+        "en"
+      ],
+      "source.keyword": [
+        "<a href=\"https://ho.com\" rel=\"nofollow\">auto is the only way it can be </a>"
+      ],
+      "retweeted_status.user.name": [
+        "Tracker C2 Bot"
+      ],
+      "user.profile_link_color": [
+        "1DA1F2"
+      ],
+      "favorited": [
+        false
+      ],
+      "retweeted_status.user.profile_image_url_https": [
+        "https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "retweeted_status.user.profile_image_url_https.keyword": [
+        "https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "user.favourites_count": [
+        38
+      ],
+      "retweeted_status.created_at": [
+        "Sun Dec 18 00:51:52 +0000 2022"
+      ],
+      "user.profile_background_image_url.keyword": [
+        ""
+      ],
+      "retweeted_status.user.profile_banner_url.keyword": [
+        "https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706"
+      ],
+      "retweeted_status.created_at.keyword": [
+        "Sun Dec 18 00:51:52 +0000 2022"
+      ],
+      "user.geo_enabled": [
+        false
+      ],
+      "retweeted_status.id": [
+        1604278238309671000
+      ],
+      "retweeted_status.user.protected": [
+        false
+      ],
+      "user.profile_sidebar_fill_color.keyword": [
+        "DDEEF6"
+      ],
+      "user.name.keyword": [
+        "Security News"
+      ],
+      "retweeted_status.reply_count": [
+        0
+      ]
+    },
+    "ignored_field_values": {
+      "event.original.keyword": [
+        "{\"created_at\": \"Sun Dec 18 00:52:02 +0000 2022\", \"id\": 1604278277538881537, \"id_str\": \"1604278277538881537\", \"text\": \"RT @TrackerC2Bot: Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://ho.com\\\" rel=\\\"nofollow\\\">auto is the only way it can be </a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 710123736175783938, \"id_str\": \"710123736175783938\", \"name\": \"Security News\", \"screen_name\": \"sectest9\", \"location\": \"Hyderabad, India\", \"url\": null, \"description\": \"News Hub! Get the latest Security News & Updates!\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 43872, \"friends_count\": 1, \"listed_count\": 6685, \"favourites_count\": 38, \"statuses_count\": 3022418, \"created_at\": \"Wed Mar 16 15:21:07 +0000 2016\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/710735123876982784/GjV7JWMk_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/710123736175783938/1458287472\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"retweeted_status\": {\"created_at\": \"Sun Dec 18 00:51:52 +0000 2022\", \"id\": 1604278238309670914, \"id_str\": \"1604278238309670914\", \"text\": \"Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://nasdm.tk\\\" rel=\\\"nofollow\\\">C2Tracker</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"name\": \"Tracker C2 Bot\", \"screen_name\": \"TrackerC2Bot\", \"location\": null, \"url\": null, \"description\": \"I am a bot looking for C&Cs\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 12, \"friends_count\": 0, \"listed_count\": 0, \"favourites_count\": 12, \"statuses_count\": 122, \"created_at\": \"Wed Dec 07 06:47:13 +0000 2022\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 1, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [39, 43]}, {\"text\": \"malware\", \"indices\": [44, 52]}], \"urls\": [], \"user_mentions\": [], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\"}, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 0, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [57, 61]}, {\"text\": \"malware\", \"indices\": [62, 70]}], \"urls\": [], \"user_mentions\": [{\"screen_name\": \"TrackerC2Bot\", \"name\": \"Tracker C2 Bot\", \"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"indices\": [3, 16]}], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\", \"timestamp_ms\": \"1671324722071\"}"
+      ]
+    }
+  }
+
+
+  ///////////////////
+  But it appears in multiple documents
+  {
+    "_index": "logstash-twitter-crawler-logs",
+    "_id": "Cui3IoUBPeDjnDFseDUQ",
+    "_version": 1,
+    "_score": 0,
+    "_ignored": [
+      "event.original.keyword"
+    ],
+    "_source": {
+      "retweeted_status": {
+        "entities": {
+          "user_mentions": [],
+          "symbols": [],
+          "hashtags": [
+            {
+              "text": "ioc",
+              "indices": [
+                39,
+                43
+              ]
+            },
+            {
+              "text": "malware",
+              "indices": [
+                44,
+                52
+              ]
+            }
+          ],
+          "urls": []
+        },
+        "contributors": null,
+        "in_reply_to_user_id": null,
+        "place": null,
+        "filter_level": "low",
+        "in_reply_to_status_id_str": null,
+        "user": {
+          "listed_count": 0,
+          "description": "I am a bot looking for C&Cs",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706",
+          "profile_sidebar_fill_color": "DDEEF6",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg",
+          "url": null,
+          "profile_text_color": "333333",
+          "name": "Tracker C2 Bot",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg",
+          "geo_enabled": false,
+          "profile_sidebar_border_color": "C0DEED",
+          "profile_background_color": "F5F8FA",
+          "profile_background_tile": false,
+          "default_profile": true,
+          "created_at": "Wed Dec 07 06:47:13 +0000 2022",
+          "lang": null,
+          "withheld_in_countries": [],
+          "followers_count": 12,
+          "profile_background_image_url_https": "",
+          "time_zone": null,
+          "favourites_count": 12,
+          "statuses_count": 122,
+          "protected": false,
+          "contributors_enabled": false,
+          "utc_offset": null,
+          "profile_background_image_url": "",
+          "default_profile_image": false,
+          "profile_use_background_image": true,
+          "verified": false,
+          "following": null,
+          "friends_count": 0,
+          "is_translator": false,
+          "notifications": null,
+          "id_str": "1600381301235896322",
+          "profile_link_color": "1DA1F2",
+          "location": null,
+          "id": 1600381301235896300,
+          "screen_name": "TrackerC2Bot",
+          "translator_type": "none",
+          "follow_request_sent": null
+        },
+        "coordinates": null,
+        "reply_count": 0,
+        "source": "<a href=\"https://nasdm.tk\" rel=\"nofollow\">C2Tracker</a>",
+        "in_reply_to_screen_name": null,
+        "created_at": "Sun Dec 18 00:51:52 +0000 2022",
+        "truncated": false,
+        "in_reply_to_user_id_str": null,
+        "lang": "en",
+        "retweeted": false,
+        "quote_count": 0,
+        "in_reply_to_status_id": null,
+        "favorited": false,
+        "is_quote_status": false,
+        "favorite_count": 0,
+        "retweet_count": 1,
+        "id_str": "1604278238309670914",
+        "text": "Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware",
+        "geo": null,
+        "id": 1604278238309671000
+      },
+      "entities": {
+        "user_mentions": [
+          {
+            "indices": [
+              3,
+              16
+            ],
+            "screen_name": "TrackerC2Bot",
+            "id": 1600381301235896300,
+            "name": "Tracker C2 Bot",
+            "id_str": "1600381301235896322"
+          }
+        ],
+        "symbols": [],
+        "hashtags": [
+          {
+            "text": "ioc",
+            "indices": [
+              57,
+              61
+            ]
+          },
+          {
+            "text": "malware",
+            "indices": [
+              62,
+              70
+            ]
+          }
+        ],
+        "urls": []
+      },
+      "timestamp_ms": "1671324722044",
+      "@timestamp": "2022-12-18T00:52:07.162261414Z",
+      "contributors": null,
+      "in_reply_to_user_id": null,
+      "place": null,
+      "filter_level": "low",
+      "in_reply_to_status_id_str": null,
+      "user": {
+        "listed_count": 434,
+        "description": "The place for InfoSec, CyberSecurity, DevSecOps, DataSecurity and many more!!! Stay tuned.",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1142424032794406912/1574254287",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg",
+        "url": null,
+        "profile_text_color": "333333",
+        "name": "Cyber Security News",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg",
+        "geo_enabled": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_background_color": "F5F8FA",
+        "profile_background_tile": false,
+        "default_profile": true,
+        "created_at": "Sat Jun 22 13:28:09 +0000 2019",
+        "lang": null,
+        "withheld_in_countries": [],
+        "followers_count": 35196,
+        "profile_background_image_url_https": "",
+        "time_zone": null,
+        "favourites_count": 55,
+        "statuses_count": 1534864,
+        "protected": false,
+        "contributors_enabled": false,
+        "utc_offset": null,
+        "profile_background_image_url": "",
+        "default_profile_image": false,
+        "profile_use_background_image": true,
+        "verified": false,
+        "following": null,
+        "friends_count": 2,
+        "is_translator": false,
+        "notifications": null,
+        "id_str": "1142424032794406912",
+        "profile_link_color": "1DA1F2",
+        "location": null,
+        "id": 1142424032794406900,
+        "screen_name": "CyberSecurityN8",
+        "translator_type": "none",
+        "follow_request_sent": null
+      },
+      "@version": "1",
+      "coordinates": null,
+      "reply_count": 0,
+      "source": "<a href=\"https://homeinc.com\" rel=\"nofollow\">forRetweeting</a>",
+      "in_reply_to_screen_name": null,
+      "created_at": "Sun Dec 18 00:52:02 +0000 2022",
+      "truncated": false,
+      "in_reply_to_user_id_str": null,
+      "lang": "en",
+      "retweeted": false,
+      "quote_count": 0,
+      "in_reply_to_status_id": null,
+      "favorited": false,
+      "is_quote_status": false,
+      "favorite_count": 0,
+      "retweet_count": 0,
+      "id_str": "1604278277425991680",
+      "text": "RT @TrackerC2Bot: Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware",
+      "geo": null,
+      "id": 1604278277425991700,
+      "event": {
+        "original": "{\"created_at\": \"Sun Dec 18 00:52:02 +0000 2022\", \"id\": 1604278277425991680, \"id_str\": \"1604278277425991680\", \"text\": \"RT @TrackerC2Bot: Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://homeinc.com\\\" rel=\\\"nofollow\\\">forRetweeting</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1142424032794406912, \"id_str\": \"1142424032794406912\", \"name\": \"Cyber Security News\", \"screen_name\": \"CyberSecurityN8\", \"location\": null, \"url\": null, \"description\": \"The place for InfoSec, CyberSecurity, DevSecOps, DataSecurity and many more!!! Stay tuned.\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 35196, \"friends_count\": 2, \"listed_count\": 434, \"favourites_count\": 55, \"statuses_count\": 1534864, \"created_at\": \"Sat Jun 22 13:28:09 +0000 2019\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1142424032794406912/1574254287\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"retweeted_status\": {\"created_at\": \"Sun Dec 18 00:51:52 +0000 2022\", \"id\": 1604278238309670914, \"id_str\": \"1604278238309670914\", \"text\": \"Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://nasdm.tk\\\" rel=\\\"nofollow\\\">C2Tracker</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"name\": \"Tracker C2 Bot\", \"screen_name\": \"TrackerC2Bot\", \"location\": null, \"url\": null, \"description\": \"I am a bot looking for C&Cs\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 12, \"friends_count\": 0, \"listed_count\": 0, \"favourites_count\": 12, \"statuses_count\": 122, \"created_at\": \"Wed Dec 07 06:47:13 +0000 2022\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 1, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [39, 43]}, {\"text\": \"malware\", \"indices\": [44, 52]}], \"urls\": [], \"user_mentions\": [], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\"}, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 0, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [57, 61]}, {\"text\": \"malware\", \"indices\": [62, 70]}], \"urls\": [], \"user_mentions\": [{\"screen_name\": \"TrackerC2Bot\", \"name\": \"Tracker C2 Bot\", \"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"indices\": [3, 16]}], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\", \"timestamp_ms\": \"1671324722044\"}"
+      }
+    },
+    "fields": {
+      "user.listed_count": [
+        434
+      ],
+      "filter_level.keyword": [
+        "low"
+      ],
+      "retweeted_status.user.profile_sidebar_fill_color": [
+        "DDEEF6"
+      ],
+      "user.profile_background_tile": [
+        false
+      ],
+      "retweeted_status.user.geo_enabled": [
+        false
+      ],
+      "retweeted_status.user.created_at": [
+        "Wed Dec 07 06:47:13 +0000 2022"
+      ],
+      "retweeted_status.user.profile_background_image_url": [
+        ""
+      ],
+      "retweeted_status.user.screen_name": [
+        "TrackerC2Bot"
+      ],
+      "created_at.keyword": [
+        "Sun Dec 18 00:52:02 +0000 2022"
+      ],
+      "retweeted_status.user.friends_count": [
+        0
+      ],
+      "retweeted_status.user.profile_text_color": [
+        "333333"
+      ],
+      "is_quote_status": [
+        false
+      ],
+      "user.screen_name.keyword": [
+        "CyberSecurityN8"
+      ],
+      "entities.user_mentions.name": [
+        "Tracker C2 Bot"
+      ],
+      "retweeted_status.user.id": [
+        1600381301235896300
+      ],
+      "user.profile_text_color.keyword": [
+        "333333"
+      ],
+      "retweeted_status.user.profile_background_image_url.keyword": [
+        ""
+      ],
+      "id": [
+        1604278277425991700
+      ],
+      "text": [
+        "RT @TrackerC2Bot: Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "retweeted_status.user.profile_background_image_url_https": [
+        ""
+      ],
+      "retweeted_status.truncated": [
+        false
+      ],
+      "retweeted_status.user.name.keyword": [
+        "Tracker C2 Bot"
+      ],
+      "retweeted_status.user.profile_image_url": [
+        "http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "retweeted_status.id_str.keyword": [
+        "1604278238309670914"
+      ],
+      "user.id": [
+        1142424032794406900
+      ],
+      "user.profile_text_color": [
+        "333333"
+      ],
+      "reply_count": [
+        0
+      ],
+      "retweeted_status.user.profile_background_image_url_https.keyword": [
+        ""
+      ],
+      "user.profile_sidebar_border_color.keyword": [
+        "C0DEED"
+      ],
+      "user.profile_background_image_url_https": [
+        ""
+      ],
+      "retweeted_status.retweeted": [
+        false
+      ],
+      "retweeted_status.user.profile_link_color": [
+        "1DA1F2"
+      ],
+      "retweeted_status.user.created_at.keyword": [
+        "Wed Dec 07 06:47:13 +0000 2022"
+      ],
+      "retweeted_status.user.profile_sidebar_border_color": [
+        "C0DEED"
+      ],
+      "user.profile_background_color.keyword": [
+        "F5F8FA"
+      ],
+      "text.keyword": [
+        "RT @TrackerC2Bot: Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "retweeted_status.user.id_str": [
+        "1600381301235896322"
+      ],
+      "user.profile_image_url.keyword": [
+        "http://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg"
+      ],
+      "retweeted_status.filter_level.keyword": [
+        "low"
+      ],
+      "user.followers_count": [
+        35196
+      ],
+      "retweeted_status.filter_level": [
+        "low"
+      ],
+      "user.name": [
+        "Cyber Security News"
+      ],
+      "created_at": [
+        "Sun Dec 18 00:52:02 +0000 2022"
+      ],
+      "retweeted_status.user.profile_background_tile": [
+        false
+      ],
+      "retweeted_status.retweet_count": [
+        1
+      ],
+      "entities.user_mentions.name.keyword": [
+        "Tracker C2 Bot"
+      ],
+      "retweeted_status.user.profile_background_color.keyword": [
+        "F5F8FA"
+      ],
+      "retweeted_status.entities.hashtags.indices": [
+        39,
+        43,
+        44,
+        52
+      ],
+      "retweeted_status.source": [
+        "<a href=\"https://nasdm.tk\" rel=\"nofollow\">C2Tracker</a>"
+      ],
+      "retweeted": [
+        false
+      ],
+      "user.created_at.keyword": [
+        "Sat Jun 22 13:28:09 +0000 2019"
+      ],
+      "entities.user_mentions.id_str.keyword": [
+        "1600381301235896322"
+      ],
+      "retweeted_status.user.profile_image_url.keyword": [
+        "http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "retweeted_status.favorited": [
+        false
+      ],
+      "entities.hashtags.text": [
+        "ioc",
+        "malware"
+      ],
+      "user.protected": [
+        false
+      ],
+      "retweeted_status.user.profile_text_color.keyword": [
+        "333333"
+      ],
+      "quote_count": [
+        0
+      ],
+      "entities.user_mentions.indices": [
+        3,
+        16
+      ],
+      "retweeted_status.text": [
+        "Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "user.profile_background_color": [
+        "F5F8FA"
+      ],
+      "retweeted_status.source.keyword": [
+        "<a href=\"https://nasdm.tk\" rel=\"nofollow\">C2Tracker</a>"
+      ],
+      "retweeted_status.entities.hashtags.text": [
+        "ioc",
+        "malware"
+      ],
+      "truncated": [
+        false
+      ],
+      "user.description.keyword": [
+        "The place for InfoSec, CyberSecurity, DevSecOps, DataSecurity and many more!!! Stay tuned."
+      ],
+      "user.profile_image_url_https.keyword": [
+        "https://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg"
+      ],
+      "retweeted_status.quote_count": [
+        0
+      ],
+      "user.description": [
+        "The place for InfoSec, CyberSecurity, DevSecOps, DataSecurity and many more!!! Stay tuned."
+      ],
+      "entities.hashtags.indices": [
+        57,
+        61,
+        62,
+        70
+      ],
+      "retweeted_status.user.translator_type.keyword": [
+        "none"
+      ],
+      "retweeted_status.user.followers_count": [
+        12
+      ],
+      "retweeted_status.user.contributors_enabled": [
+        false
+      ],
+      "lang.keyword": [
+        "en"
+      ],
+      "id_str.keyword": [
+        "1604278277425991680"
+      ],
+      "@timestamp": [
+        "2022-12-18T00:52:07.162Z"
+      ],
+      "user.profile_image_url": [
+        "http://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg"
+      ],
+      "retweeted_status.user.is_translator": [
+        false
+      ],
+      "retweeted_status.user.translator_type": [
+        "none"
+      ],
+      "retweeted_status.user.verified": [
+        false
+      ],
+      "user.verified": [
+        false
+      ],
+      "retweeted_status.favorite_count": [
+        0
+      ],
+      "retweeted_status.user.profile_banner_url": [
+        "https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706"
+      ],
+      "retweeted_status.text.keyword": [
+        "Danabot C2\nhttp://194[.]4[.]49[.]101/\n\n#ioc #malware"
+      ],
+      "retweeted_status.user.profile_sidebar_border_color.keyword": [
+        "C0DEED"
+      ],
+      "entities.hashtags.text.keyword": [
+        "ioc",
+        "malware"
+      ],
+      "retweeted_status.user.favourites_count": [
+        12
+      ],
+      "user.profile_sidebar_border_color": [
+        "C0DEED"
+      ],
+      "source": [
+        "<a href=\"https://homeinc.com\" rel=\"nofollow\">forRetweeting</a>"
+      ],
+      "entities.user_mentions.screen_name": [
+        "TrackerC2Bot"
+      ],
+      "user.translator_type": [
+        "none"
+      ],
+      "retweet_count": [
+        0
+      ],
+      "user.profile_use_background_image": [
+        true
+      ],
+      "user.id_str": [
+        "1142424032794406912"
+      ],
+      "entities.user_mentions.id": [
+        1600381301235896300
+      ],
+      "retweeted_status.user.default_profile": [
+        true
+      ],
+      "user.profile_banner_url": [
+        "https://pbs.twimg.com/profile_banners/1142424032794406912/1574254287"
+      ],
+      "user.created_at": [
+        "Sat Jun 22 13:28:09 +0000 2019"
+      ],
+      "user.profile_banner_url.keyword": [
+        "https://pbs.twimg.com/profile_banners/1142424032794406912/1574254287"
+      ],
+      "user.profile_image_url_https": [
+        "https://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg"
+      ],
+      "user.translator_type.keyword": [
+        "none"
+      ],
+      "user.profile_background_image_url": [
+        ""
+      ],
+      "event.original": [
+        "{\"created_at\": \"Sun Dec 18 00:52:02 +0000 2022\", \"id\": 1604278277425991680, \"id_str\": \"1604278277425991680\", \"text\": \"RT @TrackerC2Bot: Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://homeinc.com\\\" rel=\\\"nofollow\\\">forRetweeting</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1142424032794406912, \"id_str\": \"1142424032794406912\", \"name\": \"Cyber Security News\", \"screen_name\": \"CyberSecurityN8\", \"location\": null, \"url\": null, \"description\": \"The place for InfoSec, CyberSecurity, DevSecOps, DataSecurity and many more!!! Stay tuned.\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 35196, \"friends_count\": 2, \"listed_count\": 434, \"favourites_count\": 55, \"statuses_count\": 1534864, \"created_at\": \"Sat Jun 22 13:28:09 +0000 2019\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1142424032794406912/1574254287\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"retweeted_status\": {\"created_at\": \"Sun Dec 18 00:51:52 +0000 2022\", \"id\": 1604278238309670914, \"id_str\": \"1604278238309670914\", \"text\": \"Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://nasdm.tk\\\" rel=\\\"nofollow\\\">C2Tracker</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"name\": \"Tracker C2 Bot\", \"screen_name\": \"TrackerC2Bot\", \"location\": null, \"url\": null, \"description\": \"I am a bot looking for C&Cs\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 12, \"friends_count\": 0, \"listed_count\": 0, \"favourites_count\": 12, \"statuses_count\": 122, \"created_at\": \"Wed Dec 07 06:47:13 +0000 2022\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 1, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [39, 43]}, {\"text\": \"malware\", \"indices\": [44, 52]}], \"urls\": [], \"user_mentions\": [], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\"}, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 0, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [57, 61]}, {\"text\": \"malware\", \"indices\": [62, 70]}], \"urls\": [], \"user_mentions\": [{\"screen_name\": \"TrackerC2Bot\", \"name\": \"Tracker C2 Bot\", \"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"indices\": [3, 16]}], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\", \"timestamp_ms\": \"1671324722044\"}"
+      ],
+      "retweeted_status.id_str": [
+        "1604278238309670914"
+      ],
+      "user.default_profile_image": [
+        false
+      ],
+      "retweeted_status.user.screen_name.keyword": [
+        "TrackerC2Bot"
+      ],
+      "user.statuses_count": [
+        1534864
+      ],
+      "retweeted_status.user.profile_link_color.keyword": [
+        "1DA1F2"
+      ],
+      "@version.keyword": [
+        "1"
+      ],
+      "timestamp_ms": [
+        "1671324722044"
+      ],
+      "retweeted_status.user.id_str.keyword": [
+        "1600381301235896322"
+      ],
+      "retweeted_status.user.default_profile_image": [
+        false
+      ],
+      "user.is_translator": [
+        false
+      ],
+      "retweeted_status.user.statuses_count": [
+        122
+      ],
+      "user.screen_name": [
+        "CyberSecurityN8"
+      ],
+      "retweeted_status.user.listed_count": [
+        0
+      ],
+      "user.profile_background_image_url_https.keyword": [
+        ""
+      ],
+      "user.friends_count": [
+        2
+      ],
+      "retweeted_status.is_quote_status": [
+        false
+      ],
+      "entities.user_mentions.id_str": [
+        "1600381301235896322"
+      ],
+      "retweeted_status.user.description.keyword": [
+        "I am a bot looking for C&Cs"
+      ],
+      "user.id_str.keyword": [
+        "1142424032794406912"
+      ],
+      "entities.user_mentions.screen_name.keyword": [
+        "TrackerC2Bot"
+      ],
+      "user.contributors_enabled": [
+        false
+      ],
+      "timestamp_ms.keyword": [
+        "1671324722044"
+      ],
+      "retweeted_status.user.profile_sidebar_fill_color.keyword": [
+        "DDEEF6"
+      ],
+      "retweeted_status.user.profile_use_background_image": [
+        true
+      ],
+      "user.default_profile": [
+        true
+      ],
+      "retweeted_status.lang.keyword": [
+        "en"
+      ],
+      "filter_level": [
+        "low"
+      ],
+      "id_str": [
+        "1604278277425991680"
+      ],
+      "retweeted_status.entities.hashtags.text.keyword": [
+        "ioc",
+        "malware"
+      ],
+      "retweeted_status.lang": [
+        "en"
+      ],
+      "@version": [
+        "1"
+      ],
+      "user.profile_sidebar_fill_color": [
+        "DDEEF6"
+      ],
+      "favorite_count": [
+        0
+      ],
+      "retweeted_status.user.profile_background_color": [
+        "F5F8FA"
+      ],
+      "user.profile_link_color.keyword": [
+        "1DA1F2"
+      ],
+      "lang": [
+        "en"
+      ],
+      "retweeted_status.user.description": [
+        "I am a bot looking for C&Cs"
+      ],
+      "source.keyword": [
+        "<a href=\"https://homeinc.com\" rel=\"nofollow\">forRetweeting</a>"
+      ],
+      "retweeted_status.user.name": [
+        "Tracker C2 Bot"
+      ],
+      "favorited": [
+        false
+      ],
+      "user.profile_link_color": [
+        "1DA1F2"
+      ],
+      "retweeted_status.user.profile_image_url_https": [
+        "https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "retweeted_status.user.profile_image_url_https.keyword": [
+        "https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg"
+      ],
+      "user.favourites_count": [
+        55
+      ],
+      "retweeted_status.created_at": [
+        "Sun Dec 18 00:51:52 +0000 2022"
+      ],
+      "user.profile_background_image_url.keyword": [
+        ""
+      ],
+      "retweeted_status.user.profile_banner_url.keyword": [
+        "https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706"
+      ],
+      "retweeted_status.created_at.keyword": [
+        "Sun Dec 18 00:51:52 +0000 2022"
+      ],
+      "retweeted_status.id": [
+        1604278238309671000
+      ],
+      "user.geo_enabled": [
+        false
+      ],
+      "retweeted_status.user.protected": [
+        false
+      ],
+      "user.profile_sidebar_fill_color.keyword": [
+        "DDEEF6"
+      ],
+      "user.name.keyword": [
+        "Cyber Security News"
+      ],
+      "retweeted_status.reply_count": [
+        0
+      ]
+    },
+    "ignored_field_values": {
+      "event.original.keyword": [
+        "{\"created_at\": \"Sun Dec 18 00:52:02 +0000 2022\", \"id\": 1604278277425991680, \"id_str\": \"1604278277425991680\", \"text\": \"RT @TrackerC2Bot: Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://homeinc.com\\\" rel=\\\"nofollow\\\">forRetweeting</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1142424032794406912, \"id_str\": \"1142424032794406912\", \"name\": \"Cyber Security News\", \"screen_name\": \"CyberSecurityN8\", \"location\": null, \"url\": null, \"description\": \"The place for InfoSec, CyberSecurity, DevSecOps, DataSecurity and many more!!! Stay tuned.\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 35196, \"friends_count\": 2, \"listed_count\": 434, \"favourites_count\": 55, \"statuses_count\": 1534864, \"created_at\": \"Sat Jun 22 13:28:09 +0000 2019\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1197135188473475074/8svI-1EO_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1142424032794406912/1574254287\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"retweeted_status\": {\"created_at\": \"Sun Dec 18 00:51:52 +0000 2022\", \"id\": 1604278238309670914, \"id_str\": \"1604278238309670914\", \"text\": \"Danabot C2\\nhttp://194[.]4[.]49[.]101/\\n\\n#ioc #malware\", \"source\": \"<a href=\\\"https://nasdm.tk\\\" rel=\\\"nofollow\\\">C2Tracker</a>\", \"truncated\": false, \"in_reply_to_status_id\": null, \"in_reply_to_status_id_str\": null, \"in_reply_to_user_id\": null, \"in_reply_to_user_id_str\": null, \"in_reply_to_screen_name\": null, \"user\": {\"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"name\": \"Tracker C2 Bot\", \"screen_name\": \"TrackerC2Bot\", \"location\": null, \"url\": null, \"description\": \"I am a bot looking for C&Cs\", \"translator_type\": \"none\", \"protected\": false, \"verified\": false, \"followers_count\": 12, \"friends_count\": 0, \"listed_count\": 0, \"favourites_count\": 12, \"statuses_count\": 122, \"created_at\": \"Wed Dec 07 06:47:13 +0000 2022\", \"utc_offset\": null, \"time_zone\": null, \"geo_enabled\": false, \"lang\": null, \"contributors_enabled\": false, \"is_translator\": false, \"profile_background_color\": \"F5F8FA\", \"profile_background_image_url\": \"\", \"profile_background_image_url_https\": \"\", \"profile_background_tile\": false, \"profile_link_color\": \"1DA1F2\", \"profile_sidebar_border_color\": \"C0DEED\", \"profile_sidebar_fill_color\": \"DDEEF6\", \"profile_text_color\": \"333333\", \"profile_use_background_image\": true, \"profile_image_url\": \"http://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1600383409968365568/IQeD3044_normal.jpg\", \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1600381301235896322/1670544706\", \"default_profile\": true, \"default_profile_image\": false, \"following\": null, \"follow_request_sent\": null, \"notifications\": null, \"withheld_in_countries\": []}, \"geo\": null, \"coordinates\": null, \"place\": null, \"contributors\": null, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 1, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [39, 43]}, {\"text\": \"malware\", \"indices\": [44, 52]}], \"urls\": [], \"user_mentions\": [], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\"}, \"is_quote_status\": false, \"quote_count\": 0, \"reply_count\": 0, \"retweet_count\": 0, \"favorite_count\": 0, \"entities\": {\"hashtags\": [{\"text\": \"ioc\", \"indices\": [57, 61]}, {\"text\": \"malware\", \"indices\": [62, 70]}], \"urls\": [], \"user_mentions\": [{\"screen_name\": \"TrackerC2Bot\", \"name\": \"Tracker C2 Bot\", \"id\": 1600381301235896322, \"id_str\": \"1600381301235896322\", \"indices\": [3, 16]}], \"symbols\": []}, \"favorited\": false, \"retweeted\": false, \"filter_level\": \"low\", \"lang\": \"en\", \"timestamp_ms\": \"1671324722044\"}"
+      ]
+    }
+  }

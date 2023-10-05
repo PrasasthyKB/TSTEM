@@ -1,0 +1,133 @@
+{
+    "_index": ".ds-filebeat-8.2.2-2022.11.24-000002",
+    "_id": "qHbIRDv2b3aYAyvNa+yAYV7Q5dc=",
+    "_version": 1,
+    "_score": null,
+    "fields": {
+      "threat.indicator.type": [
+        "file"
+      ],
+      "threat.indicator.first_seen": [
+        "2022-12-24T08:31:44.000Z"
+      ],
+      "threat.indicator.file.hash.sha256": [
+        "64eb9058059522bc1a40fe2c2468847047c44ec4c611811ff38ff70896e8e5c7"
+      ],
+      "event.category": [
+        "threat"
+      ],
+      "threat.indicator.file.hash.ssdeep": [
+        "3072:ZD/XXLLor75UbYBM1pO2+K2sHucu14XYxNCauD/m+wwnIhf/ln:FLLM+7pOrKW+YxgaM/mqnI3"
+      ],
+      "related.hash": [
+        "d20deb7f0d91894710e5ea816f209c90",
+        "64eb9058059522bc1a40fe2c2468847047c44ec4c611811ff38ff70896e8e5c7",
+        "3072:ZD/XXLLor75UbYBM1pO2+K2sHucu14XYxNCauD/m+wwnIhf/ln:FLLM+7pOrKW+YxgaM/mqnI3",
+        "f38149b6ba106d5a112087946e9e5985",
+        "T14334DF0CBE92D072C15159308929CFE4672AFC709FA146AF37443B1F6E71E90BA66367"
+      ],
+      "threat.indicator.provider": [
+        "andretavare5"
+      ],
+      "threat.indicator.file.mime_type": [
+        "application/x-dosexec"
+      ],
+      "service.type": [
+        "threatintel"
+      ],
+      "agent.type": [
+        "filebeat"
+      ],
+      "abusech.malwarebazaar.anonymous": [
+        0
+      ],
+      "event.module": [
+        "threatintel"
+      ],
+      "threat.indicator.file.size": [
+        232448
+      ],
+      "threat.indicator.file.extension": [
+        "exe"
+      ],
+      "abusech.malwarebazaar.tags": [
+        "exe"
+      ],
+      "event.kind": [
+        "enrichment"
+      ],
+      "threat.indicator.file.name": [
+        "file"
+      ],
+      "event.timezone": [
+        "+00:00"
+      ],
+      "abusech.malwarebazaar.dhash_icon": [
+        "9adacedecee6eae6"
+      ],
+      "threat.indicator.file.hash.md5": [
+        "d20deb7f0d91894710e5ea816f209c90"
+      ],
+      "threat.feed.name": [
+        "[Filebeat] AbuseCH MalwareBazaar"
+      ],
+      "fileset.name": [
+        "malwarebazaar"
+      ],
+      "input.type": [
+        "httpjson"
+      ],
+      "threat.indicator.file.pe.imphash": [
+        "f38149b6ba106d5a112087946e9e5985"
+      ],
+      "threat.indicator.file.hash.sha384": [
+        "f472fb2216c4c8d4e68b009c6651dd0fc278e135bd94e517a414f77386442bdad2a59e4fc25c14493d0f699f9b0ab629"
+      ],
+      "threat.indicator.last_seen": [
+        "2022-12-24T08:37:19.000Z"
+      ],
+      "tags": [
+        "threatintel-malwarebazaar",
+        "forwarded"
+      ],
+      "abusech.malwarebazaar.intelligence.downloads": [
+        85
+      ],
+      "event.ingested": [
+        "2022-12-24T08:38:05.440Z"
+      ],
+      "threat.indicator.file.hash.tlsh": [
+        "T14334DF0CBE92D072C15159308929CFE4672AFC709FA146AF37443B1F6E71E90BA66367"
+      ],
+      "@timestamp": [
+        "2022-12-24T08:38:03.827Z"
+      ],
+      "abusech.malwarebazaar.intelligence.uploads": [
+        4
+      ],
+      "threat.feed.dashboard_id": [
+        "ad9c7430-72de-11eb-a3e3-b3cc7c78a70f"
+      ],
+      "ecs.version": [
+        "1.12.0"
+      ],
+      "event.created": [
+        "2022-12-24T08:38:03.827Z"
+      ],
+      "event.type": [
+        "indicator"
+      ],
+      "agent.version": [
+        "8.2.2"
+      ],
+      "threat.indicator.file.hash.sha1": [
+        "b27c17aea6d0b6a9ea1bd5dfddcedd2f5a190420"
+      ],
+      "event.dataset": [
+        "threatintel.malwarebazaar"
+      ]
+    },
+    "sort": [
+      1671871083827
+    ]
+  }

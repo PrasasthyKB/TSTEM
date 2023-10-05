@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: PyTorchnerPredicition
+Version: 20221017201834-3D1751
+Summary: BentoML generated model module
+Home-page: https://github.com/bentoml/BentoML
+License: UNKNOWN
+Description: # Generated BentoService bundle - PyTorchnerPredicition:20221017201834_3D1751
+        
+        This is a ML Service bundle created with BentoML, it is not recommended to edit
+        code or files contained in this directory. Instead, edit the code that uses BentoML
+        to create this bundle, and save a new BentoService bundle.
+        
+Platform: UNKNOWN
+Description-Content-Type: text/markdown

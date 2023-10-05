@@ -1,0 +1,61 @@
+{"prompt":"What is the importance of cybersecurity in today's digital world\n\n###\n\n","completion":" security"}
+{"prompt":"What are some common types of cyber attacks, and how can they be prevented\n\n###\n\n","completion":" security"}
+{"prompt":"What is a zero-day vulnerability, and how do security researchers handle it\n\n###\n\n","completion":" security"}
+{"prompt":"How does cybersecurity intersect with the fields of digital forensics and incident response\n\n###\n\n","completion":" security"}
+{"prompt":"What are the essential steps to keep a home computer secure\n\n###\n\n","completion":" security"}
+{"prompt":"What are the security implications of enabling remote desktop access on a home computer\n\n###\n\n","completion":" security"}
+{"prompt":"What measures can individuals take to avoid phishing scams\n\n###\n\n","completion":" security"}
+{"prompt":"What are the legal and ethical implications of data breaches\n\n###\n\n","completion":" security"}
+{"prompt":"What are the best practices for handling sensitive data securely\n\n###\n\n","completion":" security"}
+{"prompt":"How can organizations detect and prevent insider threats\n\n###\n\n","completion":" security"}
+{"prompt":"What strategies can organizations employ to defend against APTs\n\n###\n\n","completion":" security"}
+{"prompt":"How can users secure their internet of things (IoT) devices\n\n###\n\n","completion":" security"}
+{"prompt":"What are the potential risks of unsecured IoT devices\n\n###\n\n","completion":" security"}
+{"prompt":"What are the key security considerations for cloud environments\n\n###\n\n","completion":" security"}
+{"prompt":"What are the implications of unpatched vulnerabilities on cybersecurity\n\n###\n\n","completion":" security"}
+{"prompt":"What are the best practices for securing remote work environments\n\n###\n\n","completion":" security"}
+{"prompt":"How can organizations protect sensitive information during software development\n\n###\n\n","completion":" security"}
+{"prompt":"What are the primary challenges in securing internet-connected devices\n\n###\n\n","completion":" security"}
+{"prompt":"Tips to strengthen network security\n\n###\n\n","completion":" security"}
+{"prompt":"Ensuring data security in a remote work environment\n\n###\n\n","completion":" security"}
+{"prompt":"How banks protect customer data from cyber threats\n\n###\n\n","completion":" security"}
+{"prompt":"How to identify and remove malware from a network\n\n###\n\n","completion":" security"}
+{"prompt":"Implementing multi-factor authentication for added security\n\n###\n\n","completion":" security"}
+{"prompt":"Role of threat intelligence in proactive cybersecurity\n\n###\n\n","completion":" security"}
+{"prompt":"The latest updates on Twitter\n\n###\n\n","completion":" query"}
+{"prompt":"The latest updates on Web\n\n###\n\n","completion":" query"}
+{"prompt":"Is this email reported to the database john.doe@gmail.com\n\n###\n\n","completion":" query"}
+{"prompt":"Is the hash abcd435 existed in the Elasticsearch database\n\n###\n\n","completion":" query"}
+{"prompt":"Please block this IP 123.123.34.45 if it existed in the database.\n\n###\n\n","completion":" query"}
+{"prompt":"The latest updates through a month ago\n\n###\n\n","completion":" query"}
+{"prompt":"Give me what is stored in the database through the last week\n\n###\n\n","completion":" query"}
+{"prompt":"I want to block the IP address 192.168.0.1.\n\n###\n\n","completion":" query"}
+{"prompt":"Are there any known vulnerabilities associated with port 443\n\n###\n\n","completion":" query"}
+{"prompt":"Find any known vulnerabilities associated with port 443.\n\n###\n\n","completion":" query"}
+{"prompt":"Give me the data from the database that was added three days ago.\n\n###\n\n","completion":" query"}
+{"prompt":"Retrieve the records added to the database five days ago.\n\n###\n\n","completion":" query"}
+{"prompt":"What information was stored in the database 6 days ago\n\n###\n\n","completion":" query"}
+{"prompt":"Retrieve the data from the database that was recorded two days ago.\n\n###\n\n","completion":" query"}
+{"prompt":"I want to search for ports 345 and 535 on June 27th, 2023.\n\n###\n\n","completion":" query"}
+{"prompt":"What are some popular travel destinations in Europe\n\n###\n\n","completion":" general"}
+{"prompt":"How can one improve their time management skills\n\n###\n\n","completion":" general"}
+{"prompt":"How do different musical instruments produce sound\n\n###\n\n","completion":" general"}
+{"prompt":"What are the different genres of literature and their characteristics\n\n###\n\n","completion":" general"}
+{"prompt":"What are the steps to follow when planning a successful event\n\n###\n\n","completion":" general"}
+{"prompt":"Effective stress management strategies\n\n###\n\n","completion":" general"}
+{"prompt":"Factors influencing climate change\n\n###\n\n","completion":" general"}
+{"prompt":"How are you feeling today\n\n###\n\n","completion":" general"}
+{"prompt":"Did you have a good night's sleep\n\n###\n\n","completion":" general"}
+{"prompt":"What's your go-to comfort food\n\n###\n\n","completion":" general"}
+{"prompt":"Any recent travel experiences or places you'd like to visit\n\n###\n\n","completion":" general"}
+{"prompt":"Any recent achievements or milestones you'd like to share\n\n###\n\n","completion":" general"}
+{"prompt":"What's your favorite season of the year and why\n\n###\n\n","completion":" general"}
+{"prompt":"Any recent random acts of kindness you performed\n\n###\n\n","completion":" general"}
+{"prompt":"Any new skills or hobbies you'd like to learn in the future\n\n###\n\n","completion":" general"}
+{"prompt":"Share something that made you smile\n\n###\n\n","completion":" general"}
+{"prompt":"Any recent travel experiences\n\n###\n\n","completion":" general"}
+{"prompt":"Something you're grateful for today\n\n###\n\n","completion":" general"}
+{"prompt":"Favorite way to stay motivated\n\n###\n\n","completion":" general"}
+{"prompt":"Recent travel experiences or plans\n\n###\n\n","completion":" general"}
+{"prompt":"Hi\n\n###\n\n","completion":" general"}
+{"prompt":"What day is today\n\n###\n\n","completion":" general"}

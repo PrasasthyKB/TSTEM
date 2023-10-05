@@ -1,0 +1,6 @@
+Scrapy
+html2text
+kafka-python
+pymongo
+urllib3
+url_normalize

@@ -1,0 +1,22 @@
+{
+  "cluster": [
+    "manage_index_templates",
+    "monitor",
+    "manage_ilm",
+    "read_ilm",
+    "read_pipeline"
+  ],
+  "indices": [
+    {
+      "names": ["filebeat-*"],
+      "privileges": [
+        "write",
+        "create",
+        "create_index",
+        "manage",
+        "create_doc",
+        "manage_ilm"
+      ]
+    }
+  ]
+}

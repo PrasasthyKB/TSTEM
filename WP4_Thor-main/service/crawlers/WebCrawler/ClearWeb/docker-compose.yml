@@ -1,0 +1,42 @@
+version: '3'
+services:
+  scrapy-ache:
+    build: .
+    environment:
+      KAFKA_SERVER: ${KAFKA_SERVER}
+      SPIDER_NAME: ache
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: "500m"
+    depends_on:
+      - mongodb
+    networks:
+      - clearwebCrawler
+  scrapy-sitemap:
+    build: .
+    environment:
+      KAFKA_SERVER: ${KAFKA_SERVER}
+      SPIDER_NAME: sitemap
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: "500m"
+    depends_on:
+      - mongodb
+    networks:
+      - clearwebCrawler
+  mongodb:
+    image: mongo:5.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=Crawler
+      - MONGO_INITDB_ROOT_PASSWORD=CrawlerIsAwesome
+    networks:
+      - clearwebCrawler
+    volumes:
+      - clearweb-mongodb-data:/data/db:Z
+networks:
+  clearwebCrawler:
+    driver: bridge
+volumes:
+  clearweb-mongodb-data:

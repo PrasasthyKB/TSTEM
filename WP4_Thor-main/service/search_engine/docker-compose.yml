@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  react-app:
+    build:
+      context: ./client/thor-se-client
+    ports:
+      - "3000:80"
+    networks:
+      - thor-hunt
+    restart: always
+    environment:
+      REACT_APP_API_URL: ${REACT_APP_API_URL}
+  api:
+    build:
+      context: ./server
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env # add all the configurations mentioned in ./server/README.md file to this .env file
+    restart: always
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    ports:
+      - 27017:27017
+    networks:
+      - thor-hunt
+    volumes:
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+    restart: always
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: "27017"
+    ports:
+      - 8081:8081
+    networks:
+      - thor-hunt
+    depends_on:
+      - mongo
+    restart: always
+
+networks:
+  thor-hunt:
+
+volumes:
+  mongo_data:
+  mongo_config:

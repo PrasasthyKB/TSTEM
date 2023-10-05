@@ -1,0 +1,18 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+# https://www.elastic.co/guide/en/beats/filebeat/8.2/filtering-and-enhancing-data.html
+processors:
+  - drop_fields:
+      fields:
+        - agent.ephemeral_id
+        - agent.hostname
+        - agent.id
+        - agent.name
+# https://www.elastic.co/guide/en/beats/filebeat/8.2/elasticsearch-output.html
+output.elasticsearch:
+  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+  username: '${ELASTICSEARCH_USERNAME:}'
+  password: '${ELASTICSEARCH_PASSWORD:}'
+  # TODO: elastic index

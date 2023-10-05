@@ -1,0 +1,32 @@
+# install docker on all kafka VMs
+- hosts: kafka
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: geerlingguy.docker
+    - role: metricbeat
+- hosts: kafka
+  become: true
+  tasks:
+    - name: Take down Kafka service if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/kafka"
+    - name: Upload Kafka files
+      ansible.posix.synchronize:
+        src: "{{playbook_dir}}/../service/kafka"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+    - name: Write EXTERNAL_IP
+      lineinfile:
+        path: /home/ubuntu/kafka/.env
+        line: "EXTERNAL_IP={{ ansible_ssh_host }}"
+        create: yes
+    - name: Start Kafka and friends
+      command: docker-compose up --build -d
+      args:
+        chdir: "/home/ubuntu/kafka"

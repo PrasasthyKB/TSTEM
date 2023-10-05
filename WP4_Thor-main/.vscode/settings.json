@@ -1,0 +1,12 @@
+{
+    "files.watcherExclude": {
+        "**/.env/*/**": true,
+        "**/.terraform/*/**": true
+    },
+    "search.exclude": {
+        "**/.git": true,
+        "**/.env/*/**": true,
+        "**/.terraform/*/**": true,
+    },
+    "search.useIgnoreFiles": false,
+}

@@ -1,0 +1,125 @@
+version: '3'
+services:
+  # The 'setup' service runs a one-off script which initializes the
+  # 'logstash_internal' and 'kibana_system' users inside Elasticsearch with the
+  # values of the passwords defined in the '.env' file.
+  #
+  # This task is only performed during the *initial* startup of the stack. On all
+  # subsequent runs, the service simply returns immediately, without performing
+  # any modification to existing users.
+  setup:
+    build:
+      context: setup/
+      args:
+        ELASTIC_VERSION: 8.4.3
+    init: true
+    user: "0"
+    volumes:
+      - setup:/state:Z
+      - ./certs/es/:/usr/share/elasticsearch/config/certs
+    environment:
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+      ES_DATA_NODE_NUM: ${ES_DATA_NODE_NUM:-1}
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+      METRICBEAT_INTERNAL_PASSWORD: ${METRICBEAT_INTERNAL_PASSWORD:-}
+      FILEBEAT_INTERNAL_PASSWORD: ${FILEBEAT_INTERNAL_PASSWORD:-}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+      ES_MASTER_NODE_NAME: ${ES_MASTER_NODE_NAME:-}
+      ES_DATA_NODE_NAME: ${ES_DATA_NODE_NAME:-}
+
+    networks:
+      - elk
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f config/certs/${ES_MASTER_NODE_NAME}-0/${ES_MASTER_NODE_NAME}-0.crt ]"]
+      interval: 1s
+      timeout: 5s
+      retries: 120
+  elasticsearch:
+    build:
+      context: elasticsearch/
+      args:
+        ELASTIC_VERSION: 8.4.3
+    depends_on:
+      setup:
+        condition: service_healthy
+    restart: always
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - ./certs/es/:/usr/share/elasticsearch/config/certs:ro
+      - ../data/elk:/usr/share/elasticsearch/data:z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: -Xms3g -Xmx3g
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+      ES_PUBLISH_HOST: ${ES_PUBLISH_HOST:-}
+      ES_DATA_HOST1: ${ES_DATA_HOST1:-}
+      ES_DATA_HOST2: ${ES_DATA_HOST2:-}
+      ES_MASTER_NODE_NAME: ${ES_MASTER_NODE_NAME:-}
+      ES_DATA_NODE_NAME: ${ES_DATA_NODE_NAME:-}
+
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - elk
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200 | grep -q 'missing authentication credentials'"]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+  logstash:
+    build:
+      context: logstash/
+      args:
+        ELASTIC_VERSION: 8.4.3
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+      - ./logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro,Z
+      - ./logstash/pipeline:/usr/share/logstash/pipelines:ro,Z
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: -Xms1024m -Xmx1024m
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+      KAFKA_SERVER: ${KAFKA_SERVER:-}
+      KAFKA_CLEAR_WEB_TOPIC: ${KAFKA_CLEAR_WEB_TOPIC:-}
+      KAFKA_DARK_WEB_TOPIC: ${KAFKA_DARK_WEB_TOPIC:-}
+      KAFKA_TWITTER_TOPIC: ${KAFKA_TWITTER_TOPIC:-}
+    networks:
+      - elk
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+  kibana:
+    build:
+      context: kibana/
+      args:
+        ELASTIC_VERSION: 8.4.3
+    restart: always
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+      - /etc/letsencrypt/live/crawlers.csilabs.eu/:/etc/letsencrypt/live/crawlers.csilabs.eu/:ro
+      - /etc/letsencrypt/archive/crawlers.csilabs.eu/:/etc/letsencrypt/archive/crawlers.csilabs.eu/:ro
+    ports:
+      - "5601:5601"
+    environment:
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+    networks:
+      - elk
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+networks:
+  elk:
+    driver: bridge
+volumes:
+  setup:

@@ -1,0 +1,2 @@
+include PyTorchnerPredicition/bentoml.yml
+graft PyTorchnerPredicition/artifacts

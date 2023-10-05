@@ -1,0 +1,44 @@
+- hosts: communityfeed-crawler
+  become: true
+  pre_tasks:
+    - name: Update apt cache if required
+      apt: update_cache=yes cache_valid_time=86400
+  roles:
+    - role: fail2ban
+    - role: geerlingguy.docker
+    - role: metricbeat
+- hosts: communityfeed-crawler
+  become: true
+  tasks:
+    - name: Stop community feed crawler if running
+      command: docker-compose down
+      ignore_errors: yes
+      args:
+        chdir: "/home/ubuntu/community"
+      tags:
+        - community
+    - name: Upload crawler code
+      synchronize:
+        src: "{{playbook_dir}}/../service/crawlers/community"
+        dest: "/home/ubuntu"
+        use_ssh_args: true
+      tags:
+        - community
+    - name: Set file permissions for filebeat configs
+      ansible.builtin.file:
+        path: /home/ubuntu/community/filebeat.yml
+        mode: go-w
+      tags:
+        - community
+    - name: Set file permissions for threatintel configs
+      ansible.builtin.file:
+        path: /home/ubuntu/community/modules.d/threatintel.yml
+        mode: go-w
+      tags:
+        - community
+    - name: Start community feed crawler
+      command: docker-compose up -d --build
+      args:
+        chdir: "/home/ubuntu/community"
+      tags:
+        - community
